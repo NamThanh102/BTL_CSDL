@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox alignment="CENTER" prefHeight="700.0" prefWidth="550.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.InvoiceDetailController">
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="550.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.ChiTietHoaDonController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -102,3 +102,4 @@
         </ScrollPane>
     </children>
 </VBox>
+

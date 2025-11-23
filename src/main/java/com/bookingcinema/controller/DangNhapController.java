@@ -9,7 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 
-public class LoginController {
+public class DangNhapController {
 
     @FXML
     private TextField txtTaiKhoan;
@@ -43,12 +43,12 @@ public class LoginController {
 
             // 2. ĐIỀU HƯỚNG
             if ("QUANLY".equalsIgnoreCase(vaiTro)) {
-                App.setRoot("manager_dashboard");
+                App.setRoot("trang_chu_quan_ly");
             } else if ("NHANVIEN".equalsIgnoreCase(vaiTro)) {
                 lblMessage.setText("Xin chào Nhân Viên (Chưa có giao diện)");
             } else {
                 // Chuyển sang Dashboard Khách hàng
-                App.setRoot("customer_dashboard");
+                App.setRoot("trang_chu_khach_hang");
             }
 
         } else {
@@ -58,6 +58,7 @@ public class LoginController {
 
     @FXML
     private void switchToRegister() throws IOException {
-        App.setRoot("register"); // Chuyển sang màn hình đăng ký
+        App.setRoot("dang_ky"); // Chuyển sang màn hình đăng ký
     }
 }
+

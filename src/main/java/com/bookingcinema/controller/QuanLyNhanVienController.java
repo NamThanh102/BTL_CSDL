@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class EmployeeManagementController {
+public class QuanLyNhanVienController {
 
     @FXML private TableView<NguoiDung> tableEmployee;
     @FXML private TableColumn<NguoiDung, String> colId;
@@ -231,3 +231,4 @@ public class EmployeeManagementController {
         alert.showAndWait();
     }
 }
+

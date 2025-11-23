@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BookingTimeController {
+public class DatVeSuatChieuController {
 
     @FXML private Label lblTenPhim;
     @FXML private Label lblThongTinPhim;
@@ -90,10 +90,10 @@ public class BookingTimeController {
     }
 
     private void goToBookingSeat(SuatChieu sc) throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/booking_seat.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/dat_ve_ghe.fxml"));
         Parent root = loader.load();
 
-        BookingSeatController controller = loader.getController();
+        DatVeGheController controller = loader.getController();
         controller.setSuatChieuData(sc, selectedPhim);
 
         // SỬA ĐỔI: Dùng App.setRoot
@@ -103,6 +103,7 @@ public class BookingTimeController {
     @FXML
     public void goBack() throws IOException {
         // SỬA ĐỔI: Quay về Dashboard đơn giản hơn
-        App.setRoot("customer_dashboard");
+        App.setRoot("trang_chu_khach_hang");
     }
 }
+

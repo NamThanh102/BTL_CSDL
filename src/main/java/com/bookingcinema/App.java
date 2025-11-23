@@ -25,7 +25,7 @@ public class App extends Application {
         }
 
         // Load màn hình đăng nhập ban đầu
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/dang_nhap.fxml"));
 
         // Thiết lập kích thước chuẩn ban đầu: 1000x700
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);

@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MovieShowtimeController {
+public class QuanLyPhimSuatChieuController {
 
     // --- Quản lý Phim FXML ---
     @FXML private TextField txtTenPhim;
@@ -563,3 +563,4 @@ public class MovieShowtimeController {
         tblTheLoai.setItems(theLoaiList);
     }
 }
+

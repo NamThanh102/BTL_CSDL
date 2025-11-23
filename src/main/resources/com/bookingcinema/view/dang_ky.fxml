@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.RegisterController">
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.DangKyController">
     <padding>
         <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
     </padding>
@@ -51,3 +51,4 @@
         <Button fx:id="btnBack" onAction="#switchToLogin" text="Quay lại" prefWidth="190.0" cancelButton="true" style="-fx-cursor: hand;"/>
     </HBox>
 </VBox>
+

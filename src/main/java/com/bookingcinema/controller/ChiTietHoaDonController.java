@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InvoiceDetailController {
+public class ChiTietHoaDonController {
 
     @FXML private Label lblMaHD;
     @FXML private Label lblNgayThanhToan;
@@ -71,6 +71,7 @@ public class InvoiceDetailController {
 
     @FXML
     private void goBack() throws IOException {
-        App.setRoot("history"); // Quay lại màn hình lịch sử
+        App.setRoot("lich_su"); // Quay lại màn hình lịch sử
     }
 }
+

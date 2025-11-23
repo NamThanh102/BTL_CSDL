@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CustomerDashboardController {
+public class TrangChuKhachHangController {
 
     @FXML private Label lblWelcome;
     @FXML private FlowPane flowPanePhim;
@@ -179,10 +179,10 @@ public class CustomerDashboardController {
     }
 
     private void openBookingTime(Phim p) throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/booking_time.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/dat_ve_suat_chieu.fxml"));
         Parent root = loader.load();
 
-        BookingTimeController controller = loader.getController();
+        DatVeSuatChieuController controller = loader.getController();
         controller.setPhim(p);
 
         // SỬA ĐỔI: Dùng App.setRoot để giữ nguyên khung hình
@@ -193,17 +193,18 @@ public class CustomerDashboardController {
     private void handleLogout() throws IOException {
         UserSession.getInstance().clearSession();
         // SỬA ĐỔI
-        App.setRoot("login");
+        App.setRoot("dang_nhap");
     }
 
     @FXML
-    private void goToHistory() throws IOException {
-        App.setRoot("history");
+    private void goTolich_su() throws IOException {
+        App.setRoot("lich_su");
     }
 
     @FXML
     private void goToUpdateInfo() throws IOException {
         // Chuyển sang màn hình cập nhật thông tin
-        App.setRoot("update_info");
+        App.setRoot("cap_nhat_thong_tin");
     }
 }
+

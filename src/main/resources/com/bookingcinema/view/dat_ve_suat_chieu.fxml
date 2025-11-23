@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.BookingTimeController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.DatVeSuatChieuController">
 
     <top>
         <VBox spacing="10.0" style="-fx-background-color: #333;">
@@ -50,3 +50,4 @@
     </center>
 
 </BorderPane>
+

@@ -23,7 +23,7 @@ class ReportSummary {
     long tongSuatChieu = 0;
 }
 
-public class ReportController {
+public class BaoCaoController {
 
     // Components ĐIỀU KHIỂN
     @FXML private DatePicker dpStartDate;
@@ -268,3 +268,4 @@ public class ReportController {
         return reportList;
     }
 }
+

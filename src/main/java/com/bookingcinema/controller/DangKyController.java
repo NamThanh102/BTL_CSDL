@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class RegisterController {
+public class DangKyController {
 
     @FXML private TextField txtHoTen;
     @FXML private DatePicker dpNgaySinh;
@@ -104,6 +104,7 @@ public class RegisterController {
 
     @FXML
     private void switchToLogin() throws IOException {
-        App.setRoot("login");
+        App.setRoot("dang_nhap");
     }
 }
+

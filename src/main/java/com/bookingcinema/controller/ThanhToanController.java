@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class PaymentController {
+public class ThanhToanController {
 
     @FXML private Label lblTenPhim;
     @FXML private Label lblSuatChieu;
@@ -53,17 +53,17 @@ public class PaymentController {
         long total = (long) gheList.size() * sc.getGiaVe();
         lblTongTien.setText(String.format("Tổng tiền: %,d VNĐ", total));
 
-        loadPaymentMethods();
+        loadthanh_toanMethods();
     }
 
-    private void loadPaymentMethods() {
+    private void loadthanh_toanMethods() {
         List<PhuongThucThanhToan> list = hoaDonDAO.getPaymentMethods();
         cboPhuongThuc.setItems(FXCollections.observableArrayList(list));
         if(!list.isEmpty()) cboPhuongThuc.getSelectionModel().select(0);
     }
 
     @FXML
-    private void handlePayment() {
+    private void handlethanh_toan() {
         PhuongThucThanhToan method = cboPhuongThuc.getValue();
         if (method == null) {
             lblMessage.setText("Vui lòng chọn phương thức thanh toán!");
@@ -89,7 +89,7 @@ public class PaymentController {
 
         try {
             // SỬA ĐỔI: Quay về Dashboard
-            App.setRoot("customer_dashboard");
+            App.setRoot("trang_chu_khach_hang");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,12 +97,13 @@ public class PaymentController {
 
     @FXML
     private void goBack() throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/booking_seat.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/dat_ve_ghe.fxml"));
         Parent root = loader.load();
-        BookingSeatController controller = loader.getController();
+        DatVeGheController controller = loader.getController();
         controller.setSuatChieuData(currentSuatChieu, currentPhim);
 
         // SỬA ĐỔI: Dùng App.setRoot
         App.setRoot(root);
     }
 }
+

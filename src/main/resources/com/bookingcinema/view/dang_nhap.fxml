@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.LoginController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.DangNhapController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -35,3 +35,4 @@
 
     <Button fx:id="btnRegister" onAction="#switchToRegister" style="-fx-background-color: transparent; -fx-text-fill: blue; -fx-underline: true;" text="Chưa có tài khoản? Đăng ký ngay" />
 </VBox>
+

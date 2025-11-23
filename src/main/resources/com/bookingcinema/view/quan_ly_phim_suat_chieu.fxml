@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ScrollPane?>
 
-<VBox prefHeight="650.0" prefWidth="780.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.MovieShowtimeController">
+<VBox prefHeight="650.0" prefWidth="780.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.QuanLyPhimSuatChieuController">
     <children>
         <TabPane prefHeight="600.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -115,7 +115,7 @@
 
                 <Tab text="Quản lý Suất chiếu">
                     <content>
-                        <fx:include source="showtime_management.fxml" />
+                        <fx:include source="quan_ly_suat_chieu.fxml" />
                     </content>
                 </Tab>
                 
@@ -163,3 +163,4 @@
         </TabPane>
     </children>
 </VBox>
+

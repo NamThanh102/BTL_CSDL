@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
-public class ShiftManagementController {
+public class QuanLyCaLamViecController {
 
     @FXML private TableView<CaLamViec> tableShift;
     @FXML private TableColumn<CaLamViec, Integer> colId;
@@ -174,3 +174,4 @@ public class ShiftManagementController {
         alert.showAndWait();
     }
 }
+

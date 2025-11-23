@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ShowtimeController {
+public class SuatChieuController {
 
     // --- FXML Form Controls ---
     @FXML private ComboBox<Phim> cboPhim;
@@ -308,3 +308,4 @@ public class ShowtimeController {
         }
     }
 }
+

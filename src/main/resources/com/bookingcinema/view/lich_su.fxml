@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.HistoryController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.LichSuController">
     <top>
         <VBox spacing="10.0" style="-fx-background-color: #f0f0f0; -fx-padding: 15;">
             <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -62,3 +62,4 @@
         </VBox>
     </center>
 </BorderPane>
+

@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class ManagerDashboardController {
+public class TrangChuQuanLyController {
 
     @FXML private Label lblWelcome;
     @FXML private BorderPane contentPane;
@@ -37,20 +37,20 @@ public class ManagerDashboardController {
     }
 
     private void loadPhimShowtimeView() throws IOException {
-        loadContent("movie_showtime_management");
+        loadContent("quan_ly_phim_suat_chieu");
     }
 
     private void loadEmployeeView() throws IOException {
-        loadContent("employee_management");
+        loadContent("quan_ly_nhan_vien");
     }
 
     private void loadShiftView() throws IOException {
-        loadContent("shift_management");
+        loadContent("quan_ly_ca_lam_viec");
     }
 
     // Đã đổi tên hàm load Report View để tải ReportDetailView.fxml
-    private void loadReportView() throws IOException {
-        loadContent("ReportView");
+    private void loadbao_cao() throws IOException {
+        loadContent("bao_cao");
     }
 
     @FXML
@@ -64,13 +64,14 @@ public class ManagerDashboardController {
         } else if (source.getId().equals("btnQLCaLamViec")) {
             loadShiftView();
         } else if (source.getId().equals("btnBaoCao")) {
-            loadReportView();
+            loadbao_cao();
         }
     }
 
     @FXML
     public void handleLogout() throws IOException {
         UserSession.getInstance().clearSession();
-        App.setRoot("login");
+        App.setRoot("dang_nhap");
     }
 }
+

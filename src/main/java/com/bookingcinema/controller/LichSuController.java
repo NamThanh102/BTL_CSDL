@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class HistoryController {
+public class LichSuController {
 
     @FXML private Label lblWelcome;
     @FXML private TableView<HoaDon> tblHoaDon;
@@ -43,11 +43,11 @@ public class HistoryController {
         FXMLLoader loader = new FXMLLoader();
 
         // CẬP NHẬT: Thiết lập Location rõ ràng
-        loader.setLocation(App.class.getResource("/com/bookingcinema/view/invoice_detail.fxml"));
+        loader.setLocation(App.class.getResource("/com/bookingcinema/view/chi_tiet_hoa_don.fxml"));
 
         Parent root = loader.load(); // Lệnh load sẽ chạy sau khi Location đã được set
 
-        InvoiceDetailController controller = loader.getController();
+        ChiTietHoaDonController controller = loader.getController();
         controller.setHoaDon(hoaDon);
 
         App.setRoot(root);
@@ -145,6 +145,7 @@ public class HistoryController {
 
     @FXML
     private void goBack() throws IOException {
-        App.setRoot("customer_dashboard");
+        App.setRoot("trang_chu_khach_hang");
     }
 }
+

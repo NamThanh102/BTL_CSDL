@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class UpdateInfoController {
+public class CapNhatThongTinController {
 
     @FXML private Label lblTaiKhoan;
     @FXML private TextField txtHoTen;
@@ -104,7 +104,7 @@ public class UpdateInfoController {
             currentUser.setNgaySinh(newNgaySinh);
             currentUser.setSdt(newSDT);
             currentUser.setEmail(newEmail);
-            currentUser.setMatKhau(finalPassword); // Cần thiết nếu muốn dùng mật khẩu này cho các lần login sau (nếu lưu cache)
+            currentUser.setMatKhau(finalPassword); // Cần thiết nếu muốn dùng mật khẩu này cho các lần dang_nhap sau (nếu lưu cache)
             UserSession.getInstance().setCurrentUser(currentUser);
 
             lblMessage.setStyle("-fx-text-fill: green;");
@@ -123,6 +123,7 @@ public class UpdateInfoController {
 
     @FXML
     private void goBack() throws IOException {
-        App.setRoot("customer_dashboard");
+        App.setRoot("trang_chu_khach_hang");
     }
 }
+

@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingSeatController {
+public class DatVeGheController {
 
     @FXML private Label lblThongTinSuat;
     @FXML private GridPane gridGhe;
@@ -120,10 +120,10 @@ public class BookingSeatController {
     @FXML
     private void handleConfirm() {
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/payment.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/thanh_toan.fxml"));
             Parent root = loader.load();
 
-            PaymentController controller = loader.getController();
+            ThanhToanController controller = loader.getController();
             controller.setBookingData(currentSuatChieu, currentPhim, selectedSeats);
 
             // SỬA ĐỔI: Dùng App.setRoot
@@ -135,13 +135,14 @@ public class BookingSeatController {
 
     @FXML
     public void goBack() throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/booking_time.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/bookingcinema/view/dat_ve_suat_chieu.fxml"));
         Parent root = loader.load();
 
-        BookingTimeController controller = loader.getController();
+        DatVeSuatChieuController controller = loader.getController();
         controller.setPhim(currentPhim);
 
         // SỬA ĐỔI: Dùng App.setRoot
         App.setRoot(root);
     }
 }
+
