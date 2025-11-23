@@ -111,7 +111,7 @@ public class MovieShowtimeController {
     }
 
     private void loadTheLoaiData() {
-        allTheLoai = phimDAO.getAllTheLoai();
+        allTheLoai = theLoaiDAO.getAllTheLoai();
         flowPaneTheLoai.getChildren().clear();
 
         for (TheLoai tl : allTheLoai) {

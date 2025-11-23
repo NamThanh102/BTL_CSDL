@@ -1,12 +1,10 @@
 package com.bookingcinema.dao;
 
 import com.bookingcinema.model.Phim;
-import com.bookingcinema.model.TheLoai;
 import com.bookingcinema.utils.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
 public class PhimDAO {
 
@@ -39,20 +37,6 @@ public class PhimDAO {
                 p.setTheLoai(genres == null ? "Chưa cập nhật" : genres);
                 p.setShowtimeCount(rs.getInt("ShowtimeCount")); // NEW MAPPING
                 list.add(p);
-            }
-        } catch (SQLException e) { e.printStackTrace(); }
-        return list;
-    }
-
-    // Lấy danh sách tất cả Thể loại (cho Toggle Buttons)
-    public List<TheLoai> getAllTheLoai() {
-        List<TheLoai> list = new ArrayList<>();
-        String query = "SELECT idTheLoai, NoiDung FROM TheLoai ORDER BY NoiDung ASC";
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-            while (rs.next()) {
-                list.add(new TheLoai(rs.getInt("idTheLoai"), rs.getString("NoiDung")));
             }
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
