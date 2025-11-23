@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.RegisterController">
+    <padding>
+        <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+    </padding>
+
+    <Label text="ĐĂNG KÝ TÀI KHOẢN">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+
+    <VBox spacing="5.0" maxWidth="400.0">
+        <Label text="Họ và tên:" />
+        <TextField fx:id="txtHoTen" promptText="Nhập họ tên đầy đủ" />
+
+        <Label text="Ngày sinh:" />
+        <DatePicker fx:id="dpNgaySinh" promptText="Chọn ngày sinh" maxWidth="Infinity" />
+
+        <Label text="Số điện thoại:" />
+        <TextField fx:id="txtSDT" promptText="Nhập số điện thoại" />
+
+        <Label text="Email:" />
+        <TextField fx:id="txtEmail" promptText="Nhập email" />
+
+        <Label text="Tài khoản:" />
+        <TextField fx:id="txtTaiKhoan" promptText="Tối thiểu 8 ký tự, không dấu cách" />
+
+        <Label text="Mật khẩu:" />
+        <PasswordField fx:id="txtMatKhau" promptText="Tối thiểu 8 ký tự, 1 Hoa, 1 ĐB" />
+
+        <Label text="Xác nhận mật khẩu:" />
+        <PasswordField fx:id="txtXacNhanMatKhau" promptText="Nhập lại mật khẩu bên trên" />
+    </VBox>
+
+    <Label fx:id="lblMessage" textFill="RED" wrapText="true" />
+
+    <HBox alignment="CENTER" spacing="20.0" maxWidth="400.0">
+        <Button fx:id="btnRegister" onAction="#handleRegister" text="Đăng Ký" prefWidth="190.0" defaultButton="true" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+        <Button fx:id="btnBack" onAction="#switchToLogin" text="Quay lại" prefWidth="190.0" cancelButton="true" style="-fx-cursor: hand;"/>
+    </HBox>
+</VBox>

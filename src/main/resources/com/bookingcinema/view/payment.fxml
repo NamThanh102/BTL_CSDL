@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.PaymentController">
+
+    <top>
+        <VBox spacing="10.0" style="-fx-background-color: #333; -fx-padding: 15;">
+            <Button onAction="#goBack" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-cursor: hand;" text="&lt; Quay lại chọn ghế" />
+            <Label text="XÁC NHẬN THANH TOÁN" textFill="WHITE">
+                <font> <Font name="System Bold" size="20.0" /> </font>
+            </Label>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #f5f5f5;">
+            <padding> <Insets bottom="30.0" top="30.0" /> </padding>
+
+            <VBox maxWidth="500.0" spacing="10.0" style="-fx-background-color: white; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                <Label text="Thông tin đặt vé" textFill="#d32f2f">
+                    <font> <Font name="System Bold" size="16.0" /> </font>
+                </Label>
+                <Label fx:id="lblTenPhim" text="Phim: ..." />
+                <Label fx:id="lblSuatChieu" text="Suất chiếu: ..." />
+                <Label fx:id="lblPhong" text="Phòng: ..." />
+                <Label fx:id="lblGhe" text="Ghế: ..." wrapText="true" />
+                <Label fx:id="lblTongTien" text="Tổng tiền: ..." textFill="#d32f2f">
+                    <font> <Font name="System Bold" size="18.0" /> </font>
+                </Label>
+            </VBox>
+
+            <VBox maxWidth="500.0" spacing="10.0" style="-fx-background-color: white; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                <Label text="Phương thức thanh toán" textFill="#d32f2f">
+                    <font> <Font name="System Bold" size="16.0" /> </font>
+                </Label>
+                <ComboBox fx:id="cboPhuongThuc" prefWidth="300.0" promptText="Chọn phương thức thanh toán" />
+            </VBox>
+
+            <Button fx:id="btnPay" onAction="#handlePayment" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;" text="XÁC NHẬN THANH TOÁN" />
+            <Label fx:id="lblMessage" textFill="RED" />
+        </VBox>
+    </center>
+
+</BorderPane>

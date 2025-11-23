@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.ManagerDashboardController">
+    <top>
+        <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <children>
+                <Label text="QUẢN LÝ HỆ THỐNG" textFill="#d32f2f">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets right="350.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="lblWelcome" text="Xin chào, Quản lý">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button onAction="#handleLogout" style="-fx-cursor: hand;" text="Đăng xuất" />
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefWidth="220.0" style="-fx-background-color: #333333; -fx-padding: 10;" spacing="10.0">
+            <Button fx:id="btnQLPhim" onAction="#switchView" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;" text="🎬 Phim &amp; Suất chiếu" prefWidth="Infinity" />
+
+            <Button fx:id="btnQLNhanVien" onAction="#switchView" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;" text="👥 Quản lý Nhân viên" prefWidth="Infinity" />
+
+            <Button fx:id="btnQLCaLamViec" onAction="#switchView" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;" text="🕐 Quản lý Ca làm việc" prefWidth="Infinity" />
+
+            <Button fx:id="btnBaoCao" onAction="#switchView" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;" text="📊 Báo cáo" prefWidth="Infinity"/>
+        </VBox>
+    </left>
+    <center>
+        <BorderPane fx:id="contentPane" />
+    </center>
+</BorderPane>

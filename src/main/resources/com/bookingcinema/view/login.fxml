@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label text="HỆ THỐNG BÁN VÉ XEM PHIM ONLINE">
+        <font>
+            <Font name="System Bold" size="24.0" />
+        </font>
+    </Label>
+    <Label text="Nhóm 13" />
+
+    <VBox maxWidth="300.0" spacing="10.0">
+        <children>
+            <Label text="Tài khoản:" />
+            <TextField fx:id="txtTaiKhoan" promptText="Nhập tài khoản" />
+            <Label text="Mật khẩu:" />
+            <PasswordField fx:id="txtMatKhau" promptText="Nhập mật khẩu" />
+        </children>
+    </VBox>
+
+    <Label fx:id="lblMessage" textFill="RED" />
+
+    <Button fx:id="btnLogin" onAction="#handleLogin" prefWidth="150.0" text="Đăng Nhập" defaultButton="true"/>
+
+    <Button fx:id="btnRegister" onAction="#switchToRegister" style="-fx-background-color: transparent; -fx-text-fill: blue; -fx-underline: true;" text="Chưa có tài khoản? Đăng ký ngay" />
+</VBox>

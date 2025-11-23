@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.ReportController">
+    <children>
+        <SplitPane dividerPositions="0.25" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #f4f4f4;">
+                    <children>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="598.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <padding>
+                                <Insets left="15.0" right="15.0" top="20.0" />
+                            </padding>
+                            <children>
+                                <Label style="-fx-font-weight: bold;" text="Tạo Báo Cáo Doanh Thu">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" />
+                                    </VBox.margin>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Ngày Bắt Đầu" />
+                                <DatePicker fx:id="dpStartDate" prefWidth="1.7976931348623157E308">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="5.0" />
+                                    </VBox.margin>
+                                </DatePicker>
+                                <Label text="Ngày Kết Thúc" />
+                                <DatePicker fx:id="dpEndDate" prefWidth="1.7976931348623157E308">
+                                    <VBox.margin>
+                                        <Insets bottom="20.0" top="5.0" />
+                                    </VBox.margin>
+                                </DatePicker>
+                                <Button mnemonicParsing="false" onAction="#handleGenerateReport" prefWidth="1.7976931348623157E308" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Tạo Báo Cáo">
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <VBox fx:id="vboxReportContent" layoutX="24.0" layoutY="24.0" prefWidth="850.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" visible="false">
+                            <children>
+                                <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#handleCloseReport" text="Đóng Báo Cáo" />
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                                    </VBox.margin>
+                                </HBox>
+
+                                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                    <content>
+                                        <VBox alignment="TOP_CENTER" prefWidth="850.0" spacing="10.0" style="-fx-background-color: white;">
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="0.0" />
+                                            </padding>
+                                            <children>
+                                                <Label style="-fx-font-weight: bold;" text="CÔNG TY BÁN VÉ XEM PHIM ONLINE - NHÓM 13" />
+                                                <Label style="-fx-font-weight: bold;" text="BÁO CÁO DOANH THU">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label text="Thực hiện từ ngày: [startDate] đến ngày: [endDate]" fx:id="lblReportPeriod" />
+                                                <Separator prefWidth="200.0" />
+
+                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="1. CÁC CHỈ SỐ TỔNG HỢP">
+                                                    <VBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </VBox.margin>
+                                                </Label>
+                                                <GridPane hgap="20.0" prefWidth="750.0" style="-fx-border-color: #ccc; -fx-border-width: 1; -fx-padding: 15;">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label style="-fx-font-weight: bold;" text="TỔNG DOANH THU:" />
+                                                        <Label fx:id="lblSummaryTongDoanhThu" style="-fx-text-fill: red; -fx-font-weight: bold;" text="0 VNĐ" GridPane.rowIndex="1" />
+                                                        <Label style="-fx-font-weight: bold;" text="TỔNG SỐ VÉ BÁN:" GridPane.columnIndex="1" />
+                                                        <Label fx:id="lblSummaryTongSoVe" text="0 vé" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                        <Label style="-fx-font-weight: bold;" text="TỔNG SUẤT CHIẾU ĐÃ CÓ GIAO DỊCH:" GridPane.columnIndex="2" />
+                                                        <Label fx:id="lblSummaryTongSuatChieu" text="0 suất" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                    </children>
+                                                </GridPane>
+                                                <Separator prefWidth="200.0" />
+
+                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="2. TOP 5 PHIM CÓ DOANH THU CAO NHẤT">
+                                                    <VBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </VBox.margin>
+                                                </Label>
+                                                <TableView fx:id="tblTop5" prefHeight="200.0" prefWidth="750.0">
+                                                    <columns>
+                                                        <TableColumn prefWidth="50.0" text="ID" fx:id="colTopIdPhim" />
+                                                        <TableColumn prefWidth="200.0" text="Tên Phim" fx:id="colTopTenPhim" />
+                                                        <TableColumn prefWidth="150.0" text="Thể Loại" fx:id="colTopTheLoai" />
+                                                        <TableColumn prefWidth="100.0" text="Tổng Suất Chiếu" fx:id="colTopTongSuatChieu" />
+                                                        <TableColumn prefWidth="80.0" text="SL Vé Bán" fx:id="colTopSoVe" />
+                                                        <TableColumn prefWidth="100.0" text="Doanh Thu (VNĐ)" fx:id="colTopDoanhThu" />
+                                                        <TableColumn prefWidth="70.0" text="Tỉ Trọng (%)" fx:id="colTopTiTrong" />
+                                                    </columns>
+                                                    <columnResizePolicy>
+                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                    </columnResizePolicy>
+                                                </TableView>
+
+                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="3. TOP 5 PHIM CÓ DOANH THU THẤP NHẤT">
+                                                    <VBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </VBox.margin>
+                                                </Label>
+                                                <TableView fx:id="tblBottom5" prefHeight="200.0" prefWidth="750.0">
+                                                    <columns>
+                                                        <TableColumn prefWidth="50.0" text="ID" fx:id="colBottomIdPhim" />
+                                                        <TableColumn prefWidth="200.0" text="Tên Phim" fx:id="colBottomTenPhim" />
+                                                        <TableColumn prefWidth="150.0" text="Thể Loại" fx:id="colBottomTheLoai" />
+                                                        <TableColumn prefWidth="100.0" text="Tổng Suất Chiếu" fx:id="colBottomTongSuatChieu" />
+                                                        <TableColumn prefWidth="80.0" text="SL Vé Bán" fx:id="colBottomSoVe" />
+                                                        <TableColumn prefWidth="100.0" text="Doanh Thu (VNĐ)" fx:id="colBottomDoanhThu" />
+                                                        <TableColumn prefWidth="70.0" text="Tỉ Trọng (%)" fx:id="colBottomTiTrong" />
+                                                    </columns>
+                                                    <columnResizePolicy>
+                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                    </columnResizePolicy>
+                                                </TableView>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>
