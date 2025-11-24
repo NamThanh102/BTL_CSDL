@@ -307,5 +307,29 @@ public class SuatChieuController {
             handleResetShowtime();
         }
     }
+
+    // Phương thức public để refresh danh sách phim từ controller khác
+    public void refreshPhimList() {
+        List<Phim> phimList = phimDAO.getAllPhim();
+        Phim currentSelected = cboPhim.getValue();
+        Phim currentSearchSelected = cboSearchPhim.getValue();
+        
+        cboPhim.setItems(FXCollections.observableArrayList(phimList));
+        cboSearchPhim.setItems(FXCollections.observableArrayList(phimList));
+        
+        // Giữ lại lựa chọn hiện tại nếu còn tồn tại
+        if (currentSelected != null) {
+            cboPhim.setValue(phimList.stream()
+                .filter(p -> p.getIdPhim() == currentSelected.getIdPhim())
+                .findFirst()
+                .orElse(null));
+        }
+        if (currentSearchSelected != null) {
+            cboSearchPhim.setValue(phimList.stream()
+                .filter(p -> p.getIdPhim() == currentSearchSelected.getIdPhim())
+                .findFirst()
+                .orElse(null));
+        }
+    }
 }
 

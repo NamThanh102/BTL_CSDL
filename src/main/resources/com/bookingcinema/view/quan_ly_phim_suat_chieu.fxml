@@ -22,7 +22,7 @@
 
 <VBox prefHeight="650.0" prefWidth="780.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.QuanLyPhimSuatChieuController">
     <children>
-        <TabPane prefHeight="600.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="mainTabPane" prefHeight="600.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Quản lý Phim">
                     <content>
@@ -113,9 +113,9 @@
                     </content>
                 </Tab>
 
-                <Tab text="Quản lý Suất chiếu">
+                <Tab fx:id="tabSuatChieu" text="Quản lý Suất chiếu">
                     <content>
-                        <fx:include source="quan_ly_suat_chieu.fxml" />
+                        <fx:include fx:id="suatChieuView" source="quan_ly_suat_chieu.fxml" />
                     </content>
                 </Tab>
                 

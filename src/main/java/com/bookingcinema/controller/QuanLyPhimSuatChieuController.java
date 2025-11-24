@@ -48,6 +48,10 @@ public class QuanLyPhimSuatChieuController {
     @FXML private ComboBox<String> cboFilterThoiLuong;
     @FXML private ComboBox<String> cboFilterNgonNgu;
 
+    // --- Tab và Include Controller ---
+    @FXML private TabPane mainTabPane;
+    @FXML private SuatChieuController suatChieuViewController;
+
     // --- Quản lý Thể loại FXML ---
     @FXML private TextField txtTheLoaiName;
     @FXML private Button btnSaveTheLoai;
@@ -91,6 +95,16 @@ public class QuanLyPhimSuatChieuController {
         loadFilterOptions();
         setupActionButtonColumn();
         setupTheLoaiTable();
+
+        // Listener khi chuyển tab để refresh danh sách phim trong tab Suất chiếu
+        mainTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+            if (newTab != null && newTab.getText().equals("Quản lý Suất chiếu")) {
+                // Refresh danh sách phim trong SuatChieuController
+                if (suatChieuViewController != null) {
+                    suatChieuViewController.refreshPhimList();
+                }
+            }
+        });
 
         // Listener khi chọn phim để đổ dữ liệu ra form
         tblPhim.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
