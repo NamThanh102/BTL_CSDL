@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.InVeController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Label text="IN VÉ" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Button onAction="#goBack" style="-fx-background-color: #e0e0e0; -fx-cursor: hand;" text="← Quay lại" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="15.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+
+            <Label text="In Vé Xem Phim" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearchIdHoaDon" promptText="Nhập ID hóa đơn (ví dụ: 1)" prefWidth="300.0" />
+                <Button onAction="#handleSearch" text="Tìm kiếm" style="-fx-padding: 8px 20px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;" />
+            </HBox>
+
+            <Label fx:id="lblMessage" textFill="RED" wrapText="true" />
+
+            <HBox spacing="10.0">
+                <Button fx:id="btnPrint" onAction="#handlePrint" text="🖨️ In vé" style="-fx-padding: 10px 20px; -fx-background-color: #4caf50; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 14px;" />
+            </HBox>
+
+            <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
+                <VBox fx:id="vboxTicketInfo" spacing="10.0">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                    <VBox fx:id="vboxVeDetails" spacing="10.0" />
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+</BorderPane>

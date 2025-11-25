@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.TrangChuNhanVienController">
+
+    <top>
+        <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <children>
+                <Label text="Booking Cinema - Nhân Viên" textFill="#d32f2f">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets right="250.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="lblWelcome" text="Xin chào, Nhân viên">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+
+                <Button onAction="#goToUpdateInfo" style="-fx-background-color: #e0e0e0; -fx-cursor: hand;" text="Thông tin cá nhân" />
+
+                <Button onAction="#handleLogout" style="-fx-cursor: hand;" text="Đăng xuất" />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="30.0">
+            <padding>
+                <Insets bottom="40.0" left="60.0" right="60.0" top="40.0" />
+            </padding>
+
+            <Label text="Quản Lý Bán Vé Xem Phim" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #333;">
+            </Label>
+
+            <HBox alignment="CENTER" spacing="40.0">
+                <VBox alignment="CENTER" spacing="10.0" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 20;">
+                    <Button onAction="#goToTraCuuKhachHang" prefWidth="200.0" prefHeight="60.0" style="-fx-font-size: 14px; -fx-padding: 10px;" text="🔍 Tra Cứu Khách Hàng" />
+                    <Label text="Tìm kiếm thông tin khách hàng" alignment="CENTER" style="-fx-text-fill: #666; -fx-font-size: 12px;" wrapText="true" />
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10.0" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 20;">
+                    <Button onAction="#goToXemHoaDon" prefWidth="200.0" prefHeight="60.0" style="-fx-font-size: 14px; -fx-padding: 10px;" text="📋 Xem Hóa Đơn" />
+                    <Label text="Xem danh sách hóa đơn" alignment="CENTER" style="-fx-text-fill: #666; -fx-font-size: 12px;" wrapText="true" />
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10.0" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 20;">
+                    <Button onAction="#goToInVe" prefWidth="200.0" prefHeight="60.0" style="-fx-font-size: 14px; -fx-padding: 10px;" text="🖨️ In Vé" />
+                    <Label text="In vé cho khách hàng" alignment="CENTER" style="-fx-text-fill: #666; -fx-font-size: 12px;" wrapText="true" />
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

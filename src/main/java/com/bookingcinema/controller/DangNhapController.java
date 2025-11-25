@@ -45,7 +45,7 @@ public class DangNhapController {
             if ("QUANLY".equalsIgnoreCase(vaiTro)) {
                 App.setRoot("trang_chu_quan_ly");
             } else if ("NHANVIEN".equalsIgnoreCase(vaiTro)) {
-                lblMessage.setText("Xin chào Nhân Viên (Chưa có giao diện)");
+                App.setRoot("trang_chu_nhan_vien");
             } else {
                 // Chuyển sang Dashboard Khách hàng
                 App.setRoot("trang_chu_khach_hang");
