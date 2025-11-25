@@ -251,4 +251,74 @@ public class NguoiDungDAO {
         }
         return false;
     }
+
+    // Tìm người dùng theo tài khoản
+    public NguoiDung getUserByTaiKhoan(String taiKhoan) {
+        String query = "SELECT * FROM NguoiDung WHERE TaiKhoan = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, taiKhoan);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm người dùng theo Email
+    public NguoiDung getUserByEmail(String email) {
+        String query = "SELECT * FROM NguoiDung WHERE Email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm người dùng theo số điện thoại
+    public NguoiDung getUserBySDT(String sdt) {
+        String query = "SELECT * FROM NguoiDung WHERE SDT = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, sdt);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Helper method để map ResultSet thành NguoiDung object
+    private NguoiDung mapResultSetToNguoiDung(ResultSet rs) throws SQLException {
+        NguoiDung user = new NguoiDung();
+        user.setIdNguoiDung(rs.getString("idNguoiDung"));
+        user.setTaiKhoan(rs.getString("TaiKhoan"));
+        user.setMatKhau(rs.getString("MatKhau"));
+        user.setHoTen(rs.getString("HoTen"));
+        if (rs.getDate("NgaySinh") != null) {
+            user.setNgaySinh(rs.getDate("NgaySinh").toLocalDate());
+        }
+        user.setSdt(rs.getString("SDT"));
+        user.setEmail(rs.getString("Email"));
+        user.setVaiTro(rs.getString("VaiTro"));
+        return user;
+    }
 }

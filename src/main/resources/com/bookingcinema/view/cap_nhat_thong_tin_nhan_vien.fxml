@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.CapNhatThongTinNhanVienController">
+    <padding>
+        <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+    </padding>
+
+    <Label text="CẬP NHẬT THÔNG TIN CÁ NHÂN - NHÂN VIÊN">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+    <Label fx:id="lblTaiKhoan" text="Tài khoản: [Đang tải...]" style="-fx-font-style: italic;" />
+
+    <VBox spacing="5.0" maxWidth="400.0">
+        <Label text="Họ và tên:" />
+        <TextField fx:id="txtHoTen" promptText="Nhập họ tên đầy đủ" />
+
+        <Label text="Ngày sinh:" />
+        <DatePicker fx:id="dpNgaySinh" promptText="Chọn ngày sinh" maxWidth="Infinity" />
+
+        <Label text="Số điện thoại:" />
+        <TextField fx:id="txtSDT" promptText="Nhập số điện thoại" />
+
+        <Label text="Email:" />
+        <TextField fx:id="txtEmail" promptText="Nhập email" />
+
+        <Label text="Mật khẩu mới (Bỏ trống nếu không đổi):" />
+        <PasswordField fx:id="txtMatKhau" promptText="Tối thiểu 8 ký tự, 1 Hoa, 1 ký tự đặc biệt" />
+
+        <Label text="Xác nhận mật khẩu:" />
+        <PasswordField fx:id="txtXacNhanMatKhau" promptText="Nhập lại mật khẩu bên trên" />
+    </VBox>
+
+    <Label fx:id="lblMessage" textFill="RED" wrapText="true" />
+
+    <HBox alignment="CENTER" spacing="20.0">
+        <Button onAction="#handleUpdate" text="Lưu thay đổi" prefWidth="150.0" defaultButton="true" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button onAction="#goBack" text="Hủy" prefWidth="150.0" cancelButton="true"/>
+    </HBox>
+</VBox>
