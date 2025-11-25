@@ -191,8 +191,7 @@ public class SuatChieuController {
 
         // 3. Kiểm tra thời gian quá khứ (Áp dụng cho Lưu mới)
         LocalDateTime now = LocalDateTime.now();
-        System.out.println(now);
-        if (sc == null) {
+        if (sc != null) {
             if (thoiGian.isBefore(now) || thoiGian.isEqual(now)) {
                 return "Lỗi: Thời gian bắt đầu phải lớn hơn thời điểm hiện tại (" + now.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + ").";
             }
@@ -276,6 +275,8 @@ public class SuatChieuController {
 
     @FXML
     private void handleResetSCSearch() {
+        cboSearchPhim.getSelectionModel().select(null);
+        cboSearchPhong.getSelectionModel().select(null);
         cboSearchPhim.setValue(null);
         cboSearchPhong.setValue(null);
         tblSuatChieu.setItems(masterSuatChieuList);
