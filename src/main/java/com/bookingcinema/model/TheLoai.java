@@ -4,6 +4,7 @@ public class TheLoai {
     private int idTheLoai;
     private String noiDung;
     private int soPhim; // Số lượng phim thuộc thể loại này
+    private String idNguoiDung;
 
     public TheLoai() {}
 
@@ -20,4 +21,7 @@ public class TheLoai {
     
     public int getSoPhim() { return soPhim; }
     public void setSoPhim(int soPhim) { this.soPhim = soPhim; }
+
+    public String getIdNguoiDung() { return idNguoiDung;}
+    public void setIdNguoiDung(String idNguoiDung) { this.idNguoiDung = idNguoiDung;}
 }
