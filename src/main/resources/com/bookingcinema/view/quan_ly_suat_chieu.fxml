@@ -54,7 +54,7 @@
                 <HBox spacing="10.0">
                     <ComboBox fx:id="cboSearchPhim" promptText="Tìm theo Phim" prefWidth="200.0" />
                     <ComboBox fx:id="cboSearchPhong" promptText="Tìm theo Phòng" prefWidth="150.0" />
-                    <Button onAction="#handleSearchShowtime" text="Tìm kiếm" />
+                    <Button onAction="#handleResetSCSearch" text="Tất cả" />
                 </HBox>
                 <TableView fx:id="tblSuatChieu" prefHeight="400.0" VBox.vgrow="ALWAYS">
                     <columns>
