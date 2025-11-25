@@ -197,7 +197,7 @@ public class TrangChuKhachHangController {
     }
 
     @FXML
-    private void goTolich_su() throws IOException {
+    private void goToHistory() throws IOException {
         App.setRoot("lich_su");
     }
 

@@ -76,7 +76,7 @@
                                         </HBox>
 
                                         <HBox spacing="10.0" alignment="CENTER_LEFT">
-                                            <Label text="Lọc nâng cao:" style="-fx-font-weight: bold;" />
+                                            <Label text="Lọc:" style="-fx-font-weight: bold;" />
                                             <ComboBox fx:id="cboFilterTheLoai" promptText="Thể loại" prefWidth="120.0" />
                                             <ComboBox fx:id="cboFilterThoiLuong" promptText="Độ dài" prefWidth="120.0" />
                                             <ComboBox fx:id="cboFilterNgonNgu" promptText="Ngôn ngữ" prefWidth="120.0" />

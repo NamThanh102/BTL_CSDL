@@ -311,7 +311,7 @@ public class QuanLyPhimSuatChieuController {
 
             // 2. Filter Thể loại (AND condition)
             boolean matchGenre = "Tất cả".equals(selectedGenre) ||
-                    (phim.getTheLoai() != null && phim.getTheLoai().contains(selectedGenre));
+                    (phim.getTheLoai() != null && selectedGenre != null && phim.getTheLoai().contains(selectedGenre));
 
             // 3. Filter Thời lượng (AND condition)
             boolean matchDuration = true;

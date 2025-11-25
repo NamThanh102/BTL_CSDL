@@ -1,7 +1,9 @@
 package com.bookingcinema.controller;
 
+import com.bookingcinema.model.NguoiDung;
 import com.bookingcinema.model.ReportRevenue;
 import com.bookingcinema.utils.DatabaseConnection;
+import com.bookingcinema.utils.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -30,8 +33,10 @@ public class BaoCaoController {
     @FXML private DatePicker dpEndDate;
 
     // Components HIỂN THỊ CHUNG
-    @FXML private VBox vboxReportContent; // VBox chứa toàn bộ nội dung báo cáo chi tiết
+    @FXML private VBox vboxReportContent;
     @FXML private Label lblReportPeriod;
+    @FXML private Label lblCreatedBy;
+    @FXML private Label lblCreatedDate;
     @FXML private Label lblSummaryTongDoanhThu;
     @FXML private Label lblSummaryTongSuatChieu;
     @FXML private Label lblSummaryTongSoVe;
@@ -55,7 +60,6 @@ public class BaoCaoController {
     @FXML private TableColumn<ReportRevenue, Integer> colBottomSoVe;
     @FXML private TableColumn<ReportRevenue, Float> colBottomDoanhThu;
     @FXML private TableColumn<ReportRevenue, Float> colBottomTiTrong;
-
 
     @FXML
     public void initialize() {
@@ -160,14 +164,49 @@ public class BaoCaoController {
 
         if (startDate == null || endDate == null || startDate.isAfter(endDate)) {
             new Alert(Alert.AlertType.ERROR, "Vui lòng chọn ngày bắt đầu hợp lệ và nhỏ hơn hoặc bằng ngày kết thúc.").showAndWait();
-            if (vboxReportContent != null) vboxReportContent.setVisible(false); // Ẩn nếu dữ liệu không hợp lệ
+            if (vboxReportContent != null) vboxReportContent.setVisible(false);
             return;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        // Hiển thị khoảng thời gian báo cáo
         lblReportPeriod.setText(String.format("Thực hiện từ ngày: %s đến ngày: %s",
-                startDate.format(formatter),
-                endDate.format(formatter)));
+                startDate.format(dateFormatter),
+                endDate.format(dateFormatter)));
+
+        // Lấy thông tin người dùng từ UserSession
+        NguoiDung currentUser = UserSession.getInstance().getCurrentUser();
+
+        // Hiển thị thông tin người tạo báo cáo
+        if (currentUser != null) {
+            String vaiTro = currentUser.getVaiTro();
+            String vaiTroDisplay = "";
+
+            // Hiển thị vai trò dễ đọc hơn
+            switch (vaiTro) {
+                case "QUANLY":
+                    vaiTroDisplay = "Quản lý";
+                    break;
+                case "NHANVIEN":
+                    vaiTroDisplay = "Nhân viên";
+                    break;
+                case "KHACHHANG":
+                    vaiTroDisplay = "Khách hàng";
+                    break;
+                default:
+                    vaiTroDisplay = vaiTro;
+            }
+
+            lblCreatedBy.setText("Người tạo: " + currentUser.getHoTen() +
+                    " (" + vaiTroDisplay + ")");
+        } else {
+            lblCreatedBy.setText("Người tạo: Không xác định");
+        }
+
+        // Hiển thị thời gian tạo báo cáo
+        lblCreatedDate.setText("Thời gian tạo: " + LocalDateTime.now().format(dateTimeFormatter));
 
         ReportSummary summary = new ReportSummary();
         ObservableList<ReportRevenue> fullReport = fetchFullReport(startDate, endDate, summary);
@@ -216,16 +255,17 @@ public class BaoCaoController {
         String sql = "SELECT p.idPhim, p.Ten, " +
                 "COUNT(DISTINCT sc.idSuatChieu) AS TongSuatChieu, " +
                 "COUNT(v.idVeXemPhim) AS SoLuongVe, " +
-                "SUM(sc.GiaVe) AS TongDoanhThu, " +
+                "COALESCE(SUM(sc.GiaVe), 0) AS TongDoanhThu, " +
                 "GROUP_CONCAT(t.NoiDung SEPARATOR ', ') AS TheLoaiList " +
                 "FROM Phim p " +
-                "JOIN SuatChieu sc ON p.idPhim = sc.idPhim " +
-                "JOIN VeXemPhim v ON sc.idSuatChieu = v.idSuatChieu " +
-                "JOIN HoaDon h ON v.idHoaDon = h.idHoaDon " +
-                "JOIN TheLoaiPhim tp ON p.idPhim = tp.idPhim " +
-                "JOIN TheLoai t ON tp.idTheLoai = t.idTheLoai " +
-                "WHERE h.TrangThai = 'DATHANHTOAN' " +
-                "AND h.NgayThanhToan >= ? AND h.NgayThanhToan < ? " +
+                "LEFT JOIN TheLoaiPhim tp ON p.idPhim = tp.idPhim " +
+                "LEFT JOIN TheLoai t ON tp.idTheLoai = t.idTheLoai " +
+                "LEFT JOIN SuatChieu sc ON p.idPhim = sc.idPhim " +
+                "LEFT JOIN VeXemPhim v ON sc.idSuatChieu = v.idSuatChieu " +
+                "LEFT JOIN HoaDon h ON v.idHoaDon = h.idHoaDon " +
+                "    AND h.TrangThai = 'DATHANHTOAN' " +
+                "    AND h.NgayThanhToan >= ? " +
+                "    AND h.NgayThanhToan < ? " +
                 "GROUP BY p.idPhim, p.Ten " +
                 "ORDER BY TongDoanhThu DESC";
 
@@ -268,4 +308,3 @@ public class BaoCaoController {
         return reportList;
     }
 }
-

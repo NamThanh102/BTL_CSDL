@@ -128,14 +128,8 @@ public class SuatChieuController {
                     deleteButton.setOnAction(event -> handleDeleteShowtime(sc));
 
                     // Ràng buộc xóa: Không cho xóa suất chiếu đã qua
-                    if (sc.getThoiGianBatDau().isBefore(LocalDateTime.now())) {
-                        editButton.setDisable(true); // Không cho sửa suất chiếu đã qua
-                        deleteButton.setDisable(true);
-                        setGraphic(new HBox(5, new Label("Hết hạn")));
-                    } else {
-                        editButton.setDisable(false);
-                        setGraphic(new HBox(5, editButton, deleteButton));
-                    }
+                    editButton.setDisable(false);
+                    setGraphic(new HBox(5, editButton, deleteButton));
                 }
             }
         });

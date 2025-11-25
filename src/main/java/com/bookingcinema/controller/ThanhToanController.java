@@ -63,7 +63,7 @@ public class ThanhToanController {
     }
 
     @FXML
-    private void handlethanh_toan() {
+    private void handlePayment() {
         PhuongThucThanhToan method = cboPhuongThuc.getValue();
         if (method == null) {
             lblMessage.setText("Vui lòng chọn phương thức thanh toán!");

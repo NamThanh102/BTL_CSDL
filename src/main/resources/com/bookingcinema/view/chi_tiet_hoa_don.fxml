@@ -29,7 +29,25 @@
                             </font>
                         </Label>
                         <Label text="Hệ thống Bán vé xem phim Online - Nhóm 13" style="-fx-font-size: 11px; -fx-text-fill: #666;" />
-
+                        <VBox style="-fx-border-color: #ddd; -fx-border-width: 1 0 1 0; -fx-padding: 10 0 10 0;" spacing="5.0">
+                            <Label text="THÔNG TIN KHÁCH HÀNG" style="-fx-font-weight: bold; -fx-text-fill: #333;" />
+                            <HBox spacing="10.0">
+                                <TextFlow prefWidth="200.0">
+                                    <Text style="-fx-font-weight: bold;" text="Họ tên: " />
+                                    <Label fx:id="lblTenKhachHang" text="[Nguyễn Văn A]" />
+                                </TextFlow>
+                            </HBox>
+                            <HBox spacing="10.0">
+                                <TextFlow prefWidth="200.0">
+                                    <Text style="-fx-font-weight: bold;" text="Số điện thoại: " />
+                                    <Label fx:id="lblSdtKhachHang" text="[0123456789]" />
+                                </TextFlow>
+                                <TextFlow>
+                                    <Text style="-fx-font-weight: bold;" text="Email: " />
+                                    <Label fx:id="lblEmailKhachHang" text="[email@example.com]" />
+                                </TextFlow>
+                            </HBox>
+                        </VBox>
                         <HBox spacing="10.0">
                             <TextFlow prefWidth="200.0">
                                 <Text style="-fx-font-weight: bold;" text="Mã HĐ: " />
