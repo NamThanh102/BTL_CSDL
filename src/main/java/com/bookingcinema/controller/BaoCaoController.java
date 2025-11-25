@@ -36,6 +36,7 @@ public class BaoCaoController {
     @FXML private VBox vboxReportContent;
     @FXML private Label lblReportPeriod;
     @FXML private Label lblCreatedBy;
+    @FXML private Label lblCreatedEmail;
     @FXML private Label lblCreatedDate;
     @FXML private Label lblSummaryTongDoanhThu;
     @FXML private Label lblSummaryTongSuatChieu;
@@ -201,6 +202,7 @@ public class BaoCaoController {
 
             lblCreatedBy.setText("Người tạo: " + currentUser.getHoTen() +
                     " (" + vaiTroDisplay + ")");
+            lblCreatedEmail.setText("Email: " + currentUser.getEmail());
         } else {
             lblCreatedBy.setText("Người tạo: Không xác định");
         }

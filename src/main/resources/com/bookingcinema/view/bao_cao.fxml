@@ -93,6 +93,11 @@
                                                         <Insets top="5.0" />
                                                     </VBox.margin>
                                                 </Label>
+                                                <Label fx:id="lblCreatedEmail" style="-fx-font-style: italic;" text="Email: [email]">
+                                                    <VBox.margin>
+                                                        <Insets top="5.0" />
+                                                    </VBox.margin>
+                                                </Label>
                                                 <Label fx:id="lblCreatedDate" style="-fx-font-style: italic;" text="Thời gian tạo: [DateTime]">
                                                     <VBox.margin>
                                                         <Insets bottom="5.0" />
