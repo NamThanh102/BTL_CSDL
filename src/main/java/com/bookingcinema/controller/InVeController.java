@@ -1,6 +1,5 @@
 package com.bookingcinema.controller;
 
-import com.bookingcinema.App;
 import com.bookingcinema.dao.HoaDonDAO;
 import com.bookingcinema.model.TicketDetailDTO;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -142,10 +140,5 @@ public class InVeController {
                 }
             }
         }
-    }
-
-    @FXML
-    public void goBack() throws IOException {
-        App.setRoot("trang_chu_nhan_vien");
     }
 }
