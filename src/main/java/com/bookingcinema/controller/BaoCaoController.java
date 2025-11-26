@@ -198,10 +198,12 @@ public class BaoCaoController {
                     break;
                 default:
                     vaiTroDisplay = vaiTro;
+                    break;
             }
 
-            lblCreatedBy.setText("Người tạo: " + currentUser.getHoTen() +
-                    " (" + vaiTroDisplay + ")");
+            System.out.println(currentUser.getHoTen());
+            System.out.println(vaiTroDisplay);
+            lblCreatedBy.setText("Người tạo: " + currentUser.getHoTen() + " (" + vaiTroDisplay + ")");
             lblCreatedEmail.setText("Email: " + currentUser.getEmail());
         } else {
             lblCreatedBy.setText("Người tạo: Không xác định");
@@ -258,7 +260,7 @@ public class BaoCaoController {
                 "COUNT(DISTINCT sc.idSuatChieu) AS TongSuatChieu, " +
                 "COUNT(v.idVeXemPhim) AS SoLuongVe, " +
                 "COALESCE(SUM(sc.GiaVe), 0) AS TongDoanhThu, " +
-                "GROUP_CONCAT(t.NoiDung SEPARATOR ', ') AS TheLoaiList " +
+                "GROUP_CONCAT(DISTINCT t.NoiDung SEPARATOR ', ') AS TheLoaiList " +
                 "FROM Phim p " +
                 "LEFT JOIN TheLoaiPhim tp ON p.idPhim = tp.idPhim " +
                 "LEFT JOIN TheLoai t ON tp.idTheLoai = t.idTheLoai " +
