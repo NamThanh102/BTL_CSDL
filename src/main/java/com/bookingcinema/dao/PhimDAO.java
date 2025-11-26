@@ -8,18 +8,18 @@ import java.util.List;
 
 public class PhimDAO {
 
-    // Hàm này phải được sửa để JOIN thêm SuatChieu và tính COUNT
     public List<Phim> getAllPhim() {
         List<Phim> list = new ArrayList<>();
 
-        // CẬP NHẬT QUERY: Thêm LEFT JOIN SuatChieu và COUNT(sc.idSuatChieu)
-        String query = "SELECT p.*, GROUP_CONCAT(tl.NoiDung SEPARATOR ', ') as DanhSachTheLoai, " +
-                "COUNT(sc.idSuatChieu) as ShowtimeCount " +
+        String query = "SELECT p.*, " +
+                "GROUP_CONCAT(DISTINCT tl.NoiDung ORDER BY tl.NoiDung SEPARATOR ', ') as DanhSachTheLoai, " +
+                "COUNT(DISTINCT sc.idSuatChieu) as ShowtimeCount " +
                 "FROM Phim p " +
                 "LEFT JOIN TheLoaiPhim tlp ON p.idPhim = tlp.idPhim " +
                 "LEFT JOIN TheLoai tl ON tlp.idTheLoai = tl.idTheLoai " +
-                "LEFT JOIN SuatChieu sc ON p.idPhim = sc.idPhim " + // NEW JOIN
-                "GROUP BY p.idPhim ORDER BY p.idPhim DESC";
+                "LEFT JOIN SuatChieu sc ON p.idPhim = sc.idPhim " +
+                "GROUP BY p.idPhim " +
+                "ORDER BY p.idPhim DESC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);
@@ -35,7 +35,7 @@ public class PhimDAO {
                 p.setIdNguoiDung(rs.getString("idNguoiDung"));
                 String genres = rs.getString("DanhSachTheLoai");
                 p.setTheLoai(genres == null ? "Chưa cập nhật" : genres);
-                p.setShowtimeCount(rs.getInt("ShowtimeCount")); // NEW MAPPING
+                p.setShowtimeCount(rs.getInt("ShowtimeCount"));
                 list.add(p);
             }
         } catch (SQLException e) { e.printStackTrace(); }
