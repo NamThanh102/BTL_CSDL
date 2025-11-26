@@ -81,7 +81,7 @@
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="0.0" />
                                             </padding>
                                             <children>
-                                                <Label style="-fx-font-weight: bold;" text="CÔNG TY BÁN VÉ XEM PHIM ONLINE - NHÓM 13" />
+                                                <Label style="-fx-font-weight: bold;" text="CINEMA BOOKING ONLINE - NHÓM 13" />
                                                 <Label style="-fx-font-weight: bold;" text="BÁO CÁO DOANH THU">
                                                     <font>
                                                         <Font size="20.0" />
@@ -105,7 +105,7 @@
                                                 </Label>
                                                 <Separator prefWidth="200.0" />
 
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="1. CÁC CHỈ SỐ TỔNG HỢP">
+                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="1. TỔNG QUAN">
                                                     <VBox.margin>
                                                         <Insets top="10.0" />
                                                     </VBox.margin>
@@ -125,7 +125,7 @@
                                                         <Label fx:id="lblSummaryTongDoanhThu" style="-fx-text-fill: red; -fx-font-weight: bold;" text="0 VNĐ" GridPane.rowIndex="1" />
                                                         <Label style="-fx-font-weight: bold;" text="SỐ VÉ BÁN RA:" GridPane.columnIndex="1" />
                                                         <Label fx:id="lblSummaryTongSoVe" text="0 vé" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                        <Label style="-fx-font-weight: bold;" text="SUẤT CHIẾU CÓ VÉ BÁN RA:" GridPane.columnIndex="2" />
+                                                        <Label style="-fx-font-weight: bold;" text="TỔNG SUẤT CHIẾU:" GridPane.columnIndex="2" />
                                                         <Label fx:id="lblSummaryTongSuatChieu" text="0 suất" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                                     </children>
                                                 </GridPane>

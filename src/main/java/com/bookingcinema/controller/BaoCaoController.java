@@ -256,28 +256,41 @@ public class BaoCaoController {
         ObservableList<ReportRevenue> reportList = FXCollections.observableArrayList();
         Connection conn = null;
 
+        // QUERY ĐÚNG: Đếm vé và tính doanh thu chính xác
         String sql = "SELECT p.idPhim, p.Ten, " +
+                "GROUP_CONCAT(DISTINCT t.NoiDung ORDER BY t.NoiDung SEPARATOR ', ') AS TheLoaiList, " +
                 "COUNT(DISTINCT sc.idSuatChieu) AS TongSuatChieu, " +
-                "COUNT(v.idVeXemPhim) AS SoLuongVe, " +
-                "COALESCE(SUM(sc.GiaVe), 0) AS TongDoanhThu, " +
-                "GROUP_CONCAT(DISTINCT t.NoiDung SEPARATOR ', ') AS TheLoaiList " +
+                // ĐẾM SỐ VÉ ĐÃ BÁN (VeXemPhim với HoaDon DATHANHTOAN)
+                "COUNT(DISTINCT CASE WHEN h.TrangThai = 'DATHANHTOAN' " +
+                "    AND h.NgayThanhToan >= ? AND h.NgayThanhToan < ? " +
+                "    THEN v.idVeXemPhim END) AS SoLuongVe, " +
+                // TÍNH DOANH THU = SỐ VÉ * GIÁ VÉ SUẤT CHIẾU
+                "COALESCE(SUM(CASE WHEN h.TrangThai = 'DATHANHTOAN' " +
+                "    AND h.NgayThanhToan >= ? AND h.NgayThanhToan < ? " +
+                "    THEN sc.GiaVe ELSE 0 END), 0) AS TongDoanhThu " +
                 "FROM Phim p " +
                 "LEFT JOIN TheLoaiPhim tp ON p.idPhim = tp.idPhim " +
                 "LEFT JOIN TheLoai t ON tp.idTheLoai = t.idTheLoai " +
                 "LEFT JOIN SuatChieu sc ON p.idPhim = sc.idPhim " +
+                "    AND sc.ThoiGianBatDau >= ? " +
+                "    AND sc.ThoiGianBatDau < ? " +
                 "LEFT JOIN VeXemPhim v ON sc.idSuatChieu = v.idSuatChieu " +
                 "LEFT JOIN HoaDon h ON v.idHoaDon = h.idHoaDon " +
-                "    AND h.TrangThai = 'DATHANHTOAN' " +
-                "    AND h.NgayThanhToan >= ? " +
-                "    AND h.NgayThanhToan < ? " +
                 "GROUP BY p.idPhim, p.Ten " +
+                "HAVING TongSuatChieu > 0 " +
                 "ORDER BY TongDoanhThu DESC";
 
         try {
             conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // Set 6 parameters
             stmt.setObject(1, java.sql.Timestamp.valueOf(startDate.atStartOfDay()));
             stmt.setObject(2, java.sql.Timestamp.valueOf(endDate.plusDays(1).atStartOfDay()));
+            stmt.setObject(3, java.sql.Timestamp.valueOf(startDate.atStartOfDay()));
+            stmt.setObject(4, java.sql.Timestamp.valueOf(endDate.plusDays(1).atStartOfDay()));
+            stmt.setObject(5, java.sql.Timestamp.valueOf(startDate.atStartOfDay()));
+            stmt.setObject(6, java.sql.Timestamp.valueOf(endDate.plusDays(1).atStartOfDay()));
 
             ResultSet rs = stmt.executeQuery();
 
@@ -306,6 +319,7 @@ public class BaoCaoController {
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Lỗi truy vấn dữ liệu báo cáo chi tiết: " + e.getMessage()).showAndWait();
+            e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(conn);
         }
