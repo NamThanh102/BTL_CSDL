@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -44,25 +45,30 @@
 
             <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: white; -fx-padding: 10 20 15 20; -fx-border-color: #eee; -fx-border-width: 0 0 1 0;">
                 <children>
-                    <Label text="🔍 Bộ lọc:" style="-fx-font-weight: bold; -fx-text-fill: #555; -fx-font-size: 14px;" />
+                    <Label style="-fx-font-weight: bold; -fx-text-fill: #555; -fx-font-size: 14px;" text="🔍 Bộ lọc:" />
 
                     <VBox spacing="3.0">
-                        <Label text="Thể loại" style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" />
-                        <ComboBox fx:id="cboTheLoai" prefWidth="160.0" promptText="Tất cả" style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
+                        <Label style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" text="Tên phim" />
+                        <TextField fx:id="txtSearch" prefWidth="180.0" promptText="Nhập tên phim..." style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
                     </VBox>
 
                     <VBox spacing="3.0">
-                        <Label text="Thời lượng" style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" />
-                        <ComboBox fx:id="cboThoiLuong" prefWidth="160.0" promptText="Tất cả" style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
+                        <Label style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" text="Thể loại" />
+                        <ComboBox fx:id="cboTheLoai" prefWidth="150.0" promptText="Tất cả" style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
                     </VBox>
 
                     <VBox spacing="3.0">
-                        <Label text="Ngôn ngữ" style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" />
-                        <ComboBox fx:id="cboNgonNgu" prefWidth="160.0" promptText="Tất cả" style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
+                        <Label style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" text="Thời lượng" />
+                        <ComboBox fx:id="cboThoiLuong" prefWidth="140.0" promptText="Tất cả" style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
+                    </VBox>
+
+                    <VBox spacing="3.0">
+                        <Label style="-fx-font-size: 11px; -fx-text-fill: #888; -fx-font-weight: bold;" text="Ngôn ngữ" />
+                        <ComboBox fx:id="cboNgonNgu" prefWidth="120.0" promptText="Tất cả" style="-fx-background-color: #fff; -fx-border-color: #ccc; -fx-border-radius: 3;" />
                     </VBox>
 
                     <VBox alignment="BOTTOM_LEFT">
-                        <Button onAction="#handleResetFilter" text="Làm mới" style="-fx-background-color: #eee; -fx-cursor: hand; -fx-text-fill: #333;" />
+                        <Button onAction="#handleResetFilter" style="-fx-background-color: #eee; -fx-cursor: hand; -fx-text-fill: #333;" text="Làm mới" />
                     </VBox>
                 </children>
             </HBox>
@@ -82,4 +88,3 @@
     </center>
 
 </BorderPane>
-

@@ -81,7 +81,7 @@
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="0.0" />
                                             </padding>
                                             <children>
-                                                <Label style="-fx-font-weight: bold;" text="CINEMA BOOKING ONLINE - NHÓM 13" />
+                                                <Label style="-fx-font-weight: bold;" text="HỆ THỐNG BÁN VÉ XEM PHIM ONLINE - NHÓM 13" />
                                                 <Label style="-fx-font-weight: bold;" text="BÁO CÁO DOANH THU">
                                                     <font>
                                                         <Font size="20.0" />

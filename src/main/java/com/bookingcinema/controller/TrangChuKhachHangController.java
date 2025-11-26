@@ -10,15 +10,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
@@ -29,10 +28,11 @@ public class TrangChuKhachHangController {
     @FXML private Label lblWelcome;
     @FXML private FlowPane flowPanePhim;
 
-    // Các ComboBox lọc
+    // Các trường lọc
+    @FXML private TextField txtSearch; // Mới thêm: Ô tìm kiếm
     @FXML private ComboBox<String> cboTheLoai;
     @FXML private ComboBox<String> cboThoiLuong;
-    @FXML private ComboBox<String> cboNgonNgu; // Mới thêm
+    @FXML private ComboBox<String> cboNgonNgu;
 
     private PhimDAO phimDAO = new PhimDAO();
     private List<Phim> masterMovieList = new ArrayList<>();
@@ -43,13 +43,20 @@ public class TrangChuKhachHangController {
             lblWelcome.setText("Xin chào, " + UserSession.getInstance().getCurrentUser().getHoTen());
         }
 
+        // Tải toàn bộ phim từ CSDL
         masterMovieList = phimDAO.getAllPhim();
+
         initFilters();
         renderMovies(masterMovieList);
     }
 
     private void initFilters() {
-        // 1. Cấu hình Thể loại
+        // 1. Cấu hình listener cho ô Tìm kiếm (Live Search)
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyFilter();
+        });
+
+        // 2. Cấu hình Thể loại
         Set<String> genres = new HashSet<>();
         genres.add("Tất cả");
         for (Phim p : masterMovieList) {
@@ -62,18 +69,17 @@ public class TrangChuKhachHangController {
         cboTheLoai.setValue("Tất cả");
         cboTheLoai.setOnAction(e -> applyFilter());
 
-        // 2. Cấu hình Thời lượng
+        // 3. Cấu hình Thời lượng
         cboThoiLuong.setItems(FXCollections.observableArrayList(
                 "Tất cả", "Dưới 90 phút", "90 - 120 phút", "Trên 120 phút"
         ));
         cboThoiLuong.setValue("Tất cả");
         cboThoiLuong.setOnAction(e -> applyFilter());
 
-        // 3. MỚI: Cấu hình Ngôn ngữ
+        // 4. Cấu hình Ngôn ngữ
         Set<String> languages = new HashSet<>();
         languages.add("Tất cả");
         for (Phim p : masterMovieList) {
-            // Lấy ngôn ngữ từ danh sách phim
             if (p.getNgonNguChinh() != null && !p.getNgonNguChinh().isEmpty()) {
                 languages.add(p.getNgonNguChinh());
             }
@@ -83,13 +89,17 @@ public class TrangChuKhachHangController {
         cboNgonNgu.setOnAction(e -> applyFilter());
     }
 
-    // Logic lọc tổng hợp
+    // Logic lọc tổng hợp: Search + Filter
     private void applyFilter() {
+        String keyword = txtSearch.getText().toLowerCase().trim(); // Lấy từ khóa tìm kiếm
         String selectedGenre = cboTheLoai.getValue();
         String selectedDuration = cboThoiLuong.getValue();
-        String selectedLanguage = cboNgonNgu.getValue(); // Lấy giá trị ngôn ngữ
+        String selectedLanguage = cboNgonNgu.getValue();
 
         List<Phim> filteredList = masterMovieList.stream().filter(p -> {
+            // Check Tên phim (Tìm kiếm tương đối)
+            boolean matchName = keyword.isEmpty() || p.getTen().toLowerCase().contains(keyword);
+
             // Check Thể loại
             boolean matchGenre = "Tất cả".equals(selectedGenre) ||
                     (p.getTheLoai() != null && p.getTheLoai().contains(selectedGenre));
@@ -103,11 +113,12 @@ public class TrangChuKhachHangController {
                 else if ("Trên 120 phút".equals(selectedDuration)) matchDuration = duration > 120;
             }
 
-            // MỚI: Check Ngôn ngữ
+            // Check Ngôn ngữ
             boolean matchLanguage = "Tất cả".equals(selectedLanguage) ||
                     (p.getNgonNguChinh() != null && p.getNgonNguChinh().equals(selectedLanguage));
 
-            return matchGenre && matchDuration && matchLanguage;
+            // Phải thỏa mãn TẤT CẢ điều kiện
+            return matchName && matchGenre && matchDuration && matchLanguage;
         }).collect(Collectors.toList());
 
         renderMovies(filteredList);
@@ -115,9 +126,10 @@ public class TrangChuKhachHangController {
 
     @FXML
     private void handleResetFilter() {
+        txtSearch.clear(); // Xóa ô tìm kiếm
         cboTheLoai.setValue("Tất cả");
         cboThoiLuong.setValue("Tất cả");
-        cboNgonNgu.setValue("Tất cả"); // Reset ngôn ngữ
+        cboNgonNgu.setValue("Tất cả");
         renderMovies(masterMovieList);
     }
 
@@ -182,14 +194,12 @@ public class TrangChuKhachHangController {
         DatVeSuatChieuController controller = loader.getController();
         controller.setPhim(p);
 
-        // SỬA ĐỔI: Dùng App.setRoot để giữ nguyên khung hình
         App.setRoot(root);
     }
 
     @FXML
     private void handleLogout() throws IOException {
         UserSession.getInstance().clearSession();
-        // SỬA ĐỔI
         App.setRoot("dang_nhap");
     }
 
@@ -200,8 +210,6 @@ public class TrangChuKhachHangController {
 
     @FXML
     private void goToUpdateInfo() throws IOException {
-        // Chuyển sang màn hình cập nhật thông tin
         App.setRoot("cap_nhat_thong_tin");
     }
 }
-
