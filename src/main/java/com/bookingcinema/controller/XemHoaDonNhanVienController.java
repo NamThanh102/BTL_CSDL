@@ -1,6 +1,5 @@
 package com.bookingcinema.controller;
 
-import com.bookingcinema.App;
 import com.bookingcinema.dao.HoaDonDAO;
 import com.bookingcinema.model.HoaDon;
 import javafx.collections.FXCollections;
@@ -9,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -64,10 +62,5 @@ public class XemHoaDonNhanVienController {
             lblMessage.setText("Không tìm thấy hóa đơn cho người dùng: " + idNguoiDung);
             lblMessage.setStyle("-fx-text-fill: red;");
         }
-    }
-
-    @FXML
-    public void goBack() throws IOException {
-        App.setRoot("trang_chu_nhan_vien");
     }
 }

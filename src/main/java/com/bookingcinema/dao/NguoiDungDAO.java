@@ -306,6 +306,168 @@ public class NguoiDungDAO {
         return null;
     }
 
+    // Tìm kiếm partial match - Tài khoản (chỉ khách hàng)
+    public NguoiDung searchCustomerByTaiKhoan(String taiKhoan) {
+        String query = "SELECT * FROM NguoiDung WHERE TaiKhoan LIKE ? AND VaiTro = 'KHACHHANG'";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + taiKhoan + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Email (chỉ khách hàng)
+    public NguoiDung searchCustomerByEmail(String email) {
+        String query = "SELECT * FROM NguoiDung WHERE Email LIKE ? AND VaiTro = 'KHACHHANG'";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + email + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Số điện thoại (chỉ khách hàng)
+    public NguoiDung searchCustomerBySDT(String sdt) {
+        String query = "SELECT * FROM NguoiDung WHERE SDT LIKE ? AND VaiTro = 'KHACHHANG'";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + sdt + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Tài khoản (chỉ nhân viên)
+    public NguoiDung searchEmployeeByTaiKhoan(String taiKhoan) {
+        String query = "SELECT * FROM NguoiDung WHERE TaiKhoan LIKE ? AND VaiTro = 'NHANVIEN'";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + taiKhoan + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Email (chỉ nhân viên)
+    public NguoiDung searchEmployeeByEmail(String email) {
+        String query = "SELECT * FROM NguoiDung WHERE Email LIKE ? AND VaiTro = 'NHANVIEN'";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + email + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Số điện thoại (chỉ nhân viên)
+    public NguoiDung searchEmployeeBySDT(String sdt) {
+        String query = "SELECT * FROM NguoiDung WHERE SDT LIKE ? AND VaiTro = 'NHANVIEN'";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + sdt + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Tài khoản
+    public NguoiDung searchUserByTaiKhoan(String taiKhoan) {
+        String query = "SELECT * FROM NguoiDung WHERE TaiKhoan LIKE ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + taiKhoan + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Email
+    public NguoiDung searchUserByEmail(String email) {
+        String query = "SELECT * FROM NguoiDung WHERE Email LIKE ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + email + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Tìm kiếm partial match - Số điện thoại
+    public NguoiDung searchUserBySDT(String sdt) {
+        String query = "SELECT * FROM NguoiDung WHERE SDT LIKE ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + sdt + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToNguoiDung(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     // Helper method để map ResultSet thành NguoiDung object
     private NguoiDung mapResultSetToNguoiDung(ResultSet rs) throws SQLException {
         NguoiDung user = new NguoiDung();

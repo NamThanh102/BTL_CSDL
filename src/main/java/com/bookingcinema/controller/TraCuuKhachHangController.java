@@ -1,13 +1,10 @@
 package com.bookingcinema.controller;
 
-import com.bookingcinema.App;
 import com.bookingcinema.dao.NguoiDungDAO;
 import com.bookingcinema.model.NguoiDung;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 public class TraCuuKhachHangController {
 
@@ -45,13 +42,13 @@ public class TraCuuKhachHangController {
         String searchType = cboSearchType.getValue();
         NguoiDung user = null;
 
-        // Tìm kiếm theo loại
+        // Tìm kiếm theo loại (chỉ khách hàng)
         if ("Tài khoản".equals(searchType)) {
-            user = nguoiDungDAO.getUserByTaiKhoan(searchInput);
+            user = nguoiDungDAO.searchCustomerByTaiKhoan(searchInput);
         } else if ("Email".equals(searchType)) {
-            user = nguoiDungDAO.getUserByEmail(searchInput);
+            user = nguoiDungDAO.searchCustomerByEmail(searchInput);
         } else if ("Số điện thoại".equals(searchType)) {
-            user = nguoiDungDAO.getUserBySDT(searchInput);
+            user = nguoiDungDAO.searchCustomerBySDT(searchInput);
         }
 
         if (user != null) {
@@ -73,10 +70,5 @@ public class TraCuuKhachHangController {
         lblNgaySinh.setText("Ngày sinh: " + (user.getNgaySinh() != null ? user.getNgaySinh() : "N/A"));
         lblVaiTro.setText("Vai trò: " + user.getVaiTro());
         vboxKhachHangInfo.setVisible(true);
-    }
-
-    @FXML
-    public void goBack() throws IOException {
-        App.setRoot("trang_chu_nhan_vien");
     }
 }

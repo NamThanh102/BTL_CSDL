@@ -12,16 +12,6 @@
 
 <BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bookingcinema.controller.TraCuuKhachHangController">
 
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-width: 0 0 1 0;">
-            <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-            </padding>
-            <Label text="TRA CỨU KHÁCH HÀNG" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-            <Button onAction="#goBack" style="-fx-background-color: #e0e0e0; -fx-cursor: hand;" text="← Quay lại" />
-        </HBox>
-    </top>
-
     <center>
         <VBox spacing="20.0" alignment="TOP_CENTER">
             <padding>
@@ -33,7 +23,7 @@
             <HBox spacing="15.0" alignment="CENTER_LEFT">
                 <Label text="Tìm theo:" />
                 <ComboBox fx:id="cboSearchType" prefWidth="150.0" />
-                <TextField fx:id="txtSearchInput" promptText="Nhập thông tin..." prefWidth="300.0" />
+                <TextField fx:id="txtSearchInput" promptText="Nhập thông tin tìm kiếm..." prefWidth="300.0" />
                 <Button onAction="#handleSearch" text="Tìm kiếm" style="-fx-padding: 8px 20px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;" />
             </HBox>
 
