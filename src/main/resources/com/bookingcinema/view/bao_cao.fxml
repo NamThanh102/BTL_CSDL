@@ -125,7 +125,7 @@
                                                         <Label fx:id="lblSummaryTongDoanhThu" style="-fx-text-fill: red; -fx-font-weight: bold;" text="0 VNĐ" GridPane.rowIndex="1" />
                                                         <Label style="-fx-font-weight: bold;" text="SỐ VÉ BÁN RA:" GridPane.columnIndex="1" />
                                                         <Label fx:id="lblSummaryTongSoVe" text="0 vé" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                        <Label style="-fx-font-weight: bold;" text="TỔNG SUẤT CHIẾU:" GridPane.columnIndex="2" />
+                                                        <Label style="-fx-font-weight: bold;" text="TỔNG SUẤT CHIẾU CÓ VÉ BÁN RA:" GridPane.columnIndex="2" />
                                                         <Label fx:id="lblSummaryTongSuatChieu" text="0 suất" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                                     </children>
                                                 </GridPane>
