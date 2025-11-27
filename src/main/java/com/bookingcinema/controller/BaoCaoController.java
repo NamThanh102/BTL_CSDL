@@ -305,6 +305,37 @@ public class BaoCaoController {
             }
             
             document.add(bottom5Table);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+
+            // Phần ký tên
+            Table signatureTable = new Table(UnitValue.createPercentArray(new float[]{1, 1}));
+            signatureTable.setWidth(UnitValue.createPercentValue(100));
+            
+            // Người viết
+            Cell leftTitleCell = new Cell().add(new Paragraph("Người viết:").setFont(boldFont).setFontSize(11));
+            leftTitleCell.setBorder(com.itextpdf.layout.borders.Border.NO_BORDER);
+            
+            // Người nhận
+            Cell rightTitleCell = new Cell().add(new Paragraph("Người nhận:").setFont(boldFont).setFontSize(11));
+            rightTitleCell.setBorder(com.itextpdf.layout.borders.Border.NO_BORDER);
+            rightTitleCell.setTextAlignment(TextAlignment.CENTER);
+
+            signatureTable.addCell(leftTitleCell);
+            signatureTable.addCell(rightTitleCell);
+            
+            // Dòng ghi chú in nghiêng
+            Cell leftNoteCell = new Cell().add(new Paragraph("(Ký, ghi rõ họ tên)").setFont(font).setFontSize(9).setItalic());
+            leftNoteCell.setBorder(com.itextpdf.layout.borders.Border.NO_BORDER);
+            
+            Cell rightNoteCell = new Cell().add(new Paragraph("(Ký, ghi rõ họ tên)").setFont(font).setFontSize(9).setItalic());
+            rightNoteCell.setBorder(com.itextpdf.layout.borders.Border.NO_BORDER);
+            rightNoteCell.setTextAlignment(TextAlignment.CENTER);
+            
+            signatureTable.addCell(leftNoteCell);
+            signatureTable.addCell(rightNoteCell);
+            
+            document.add(signatureTable);
 
         } finally {
             document.close();

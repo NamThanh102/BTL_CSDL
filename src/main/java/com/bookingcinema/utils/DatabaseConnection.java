@@ -5,10 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    // Thông tin cấu hình Database dựa trên file SQL bạn cung cấp
     private static final String URL = "jdbc:mysql://localhost:3306/QuanLyBanVeOnline";
-    private static final String USER = "root"; // Mặc định của XAMPP/MySQL, hãy đổi nếu bạn đặt khác
-    private static final String PASSWORD = "123456"; // Mặc định thường trống hoặc "123456", hãy điền pass của bạn
+    private static final String USER = "root"; 
+    private static final String PASSWORD = "123456";
 
     private static Connection connection = null;
 
