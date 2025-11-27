@@ -1,9 +1,7 @@
 package com.bookingcinema.dao;
 
-import com.bookingcinema.model.NguoiDung;
 import com.bookingcinema.model.TheLoai;
 import com.bookingcinema.utils.DatabaseConnection;
-import com.bookingcinema.utils.UserSession;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,20 +32,10 @@ public class TheLoaiDAO {
     }
 
     public boolean insertTheLoai(TheLoai theLoai) {
-        // 1. Lấy idNguoiDung hiện tại từ UserSession
-        NguoiDung currentUser = UserSession.getInstance().getCurrentUser();
-        if (currentUser == null) {
-            System.err.println("Lỗi: Không tìm thấy thông tin người dùng trong session.");
-            return false;
-        }
-        String idNguoiDung = currentUser.getIdNguoiDung();
-
-        // 2. Cập nhật truy vấn để bao gồm idNguoiDung
-        String query = "INSERT INTO TheLoai (NoiDung, idNguoiDung) VALUES (?, ?)";
+        String query = "INSERT INTO TheLoai (NoiDung) VALUES (?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, theLoai.getNoiDung());
-            pstmt.setString(2, idNguoiDung); // Thêm idNguoiDung vào truy vấn
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
