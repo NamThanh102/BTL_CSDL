@@ -3,6 +3,9 @@ module com.bookingcinema {
     requires javafx.fxml;
     requires java.sql;             // Cần thiết cho JDBC/MySQL
     requires mysql.connector.j;    // Cần thiết cho Driver MySQL
+    requires kernel;               // iText PDF kernel
+    requires layout;               // iText PDF layout
+    requires io;                   // iText PDF io
 
     // Mở package cho JavaFX truy cập để load giao diện
     opens com.bookingcinema to javafx.fxml;

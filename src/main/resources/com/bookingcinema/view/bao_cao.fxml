@@ -65,8 +65,9 @@
                     <children>
                         <VBox fx:id="vboxReportContent" layoutX="24.0" layoutY="24.0" prefWidth="850.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" visible="false">
                             <children>
-                                <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                                <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
                                     <children>
+                                        <Button mnemonicParsing="false" onAction="#handleExportPDF" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Xuất PDF" />
                                         <Button mnemonicParsing="false" onAction="#handleCloseReport" text="Đóng Báo Cáo" />
                                     </children>
                                     <VBox.margin>

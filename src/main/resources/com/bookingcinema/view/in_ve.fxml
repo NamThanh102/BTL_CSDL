@@ -26,9 +26,7 @@
 
             <Label fx:id="lblMessage" textFill="RED" wrapText="true" />
 
-            <HBox spacing="10.0">
-                <Button fx:id="btnPrint" onAction="#handlePrint" text="🖨️ In vé" style="-fx-padding: 10px 20px; -fx-background-color: #4caf50; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 14px;" />
-            </HBox>
+            <Button fx:id="btnExportPDF" onAction="#handleExportPDF" text="📄 Xuất PDF" style="-fx-padding: 10px 20px; -fx-background-color: #ff9800; -fx-text-fill: white; -fx-cursor: hand; -fx-font-size: 14px;" />
 
             <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
                 <VBox fx:id="vboxTicketInfo" spacing="10.0">

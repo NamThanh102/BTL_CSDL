@@ -10,6 +10,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.io.font.PdfEncodings;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -156,6 +171,143 @@ public class BaoCaoController {
         // ẨN BÁO CÁO KHI NHẤN NÚT ĐÓNG
         if (vboxReportContent != null) {
             vboxReportContent.setVisible(false);
+        }
+    }
+
+    @FXML
+    public void handleExportPDF() {
+        if (vboxReportContent == null || !vboxReportContent.isVisible()) {
+            new Alert(Alert.AlertType.WARNING, "Vui lòng tạo báo cáo trước khi xuất PDF!").showAndWait();
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Lưu Báo Cáo PDF");
+        fileChooser.setInitialFileName("BaoCaoDoanhThu_" + LocalDate.now() + ".pdf");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
+        );
+
+        File file = fileChooser.showSaveDialog(vboxReportContent.getScene().getWindow());
+        if (file != null) {
+            try {
+                generatePDF(file.getAbsolutePath());
+                new Alert(Alert.AlertType.INFORMATION, "Xuất PDF thành công!\nĐường dẫn: " + file.getAbsolutePath()).showAndWait();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Lỗi khi xuất PDF: " + e.getMessage()).showAndWait();
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void generatePDF(String filePath) throws IOException {
+        PdfWriter writer = new PdfWriter(filePath);
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document document = new Document(pdfDoc);
+
+        try {
+            // Load custom font from resources
+            InputStream fontStream = getClass().getResourceAsStream("/fonts/DejaVuSans.ttf");
+            InputStream boldFontStream = getClass().getResourceAsStream("/fonts/DejaVuSans-Bold.ttf");
+            
+            PdfFont font = PdfFontFactory.createFont(fontStream.readAllBytes(), PdfEncodings.IDENTITY_H, PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
+            PdfFont boldFont = PdfFontFactory.createFont(boldFontStream.readAllBytes(), PdfEncodings.IDENTITY_H, PdfFontFactory.EmbeddingStrategy.FORCE_EMBEDDED);
+            
+            // Tiêu đề
+            Paragraph title = new Paragraph("CÔNG TY BÁN VÉ XEM PHIM ONLINE - NHÓM 13")
+                .setFont(boldFont)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(16);
+            document.add(title);
+
+            Paragraph subtitle = new Paragraph("BÁO CÁO DOANH THU")
+                .setFont(boldFont)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(14);
+            document.add(subtitle);
+
+            // Thông tin báo cáo
+            document.add(new Paragraph(lblReportPeriod.getText()).setFont(font).setFontSize(10));
+            document.add(new Paragraph(lblCreatedBy.getText()).setFont(font).setFontSize(10));
+            document.add(new Paragraph(lblCreatedEmail.getText()).setFont(font).setFontSize(10));
+            document.add(new Paragraph(lblCreatedDate.getText()).setFont(font).setFontSize(10));
+            document.add(new Paragraph("\n"));
+
+            // Phần 1: Tổng hợp
+            document.add(new Paragraph("1. CÁC CHỈ SỐ TỔNG HỢP").setFont(boldFont).setFontSize(12));
+            
+            Table summaryTable = new Table(UnitValue.createPercentArray(new float[]{1, 1, 1}));
+            summaryTable.setWidth(UnitValue.createPercentValue(100));
+            summaryTable.setFontSize(9);
+            
+            summaryTable.addHeaderCell(new Cell().add(new Paragraph("TỔNG DOANH THU").setFont(boldFont)));
+            summaryTable.addHeaderCell(new Cell().add(new Paragraph("SỐ VÉ BÁN RA").setFont(boldFont)));
+            summaryTable.addHeaderCell(new Cell().add(new Paragraph("SUẤT CHIẾU ĐÃ CÓ GIAO DỊCH").setFont(boldFont)));
+            
+            summaryTable.addCell(new Cell().add(new Paragraph(lblSummaryTongDoanhThu.getText()).setFont(font)));
+            summaryTable.addCell(new Cell().add(new Paragraph(lblSummaryTongSoVe.getText()).setFont(font)));
+            summaryTable.addCell(new Cell().add(new Paragraph(lblSummaryTongSuatChieu.getText()).setFont(font)));
+            
+            document.add(summaryTable);
+            document.add(new Paragraph("\n"));
+
+            // Phần 2: Top 5 phim có doanh thu cao nhất
+            document.add(new Paragraph("2. TOP 5 PHIM CÓ DOANH THU CAO NHẤT").setFont(boldFont).setFontSize(12));
+            
+            Table top5Table = new Table(UnitValue.createPercentArray(new float[]{0.8f, 2.5f, 2.5f, 1.2f, 1.2f, 1.5f, 1.3f}));
+            top5Table.setWidth(UnitValue.createPercentValue(100));
+            top5Table.setFontSize(8);
+            
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("ID").setFont(boldFont)));
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("Tên Phim").setFont(boldFont)));
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("Thể Loại").setFont(boldFont)));
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("Suất Chiếu").setFont(boldFont)));
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("Vé Bán").setFont(boldFont)));
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("Doanh Thu").setFont(boldFont)));
+            top5Table.addHeaderCell(new Cell().add(new Paragraph("Tỉ Trọng").setFont(boldFont)));
+
+            for (ReportRevenue item : tblTop5.getItems()) {
+                top5Table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getIdPhim())).setFont(font)));
+                top5Table.addCell(new Cell().add(new Paragraph(item.getTenPhim()).setFont(font)));
+                top5Table.addCell(new Cell().add(new Paragraph(item.getTheLoai()).setFont(font)));
+                top5Table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getTongSuatChieu())).setFont(font)));
+                top5Table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getSoLuongVe())).setFont(font)));
+                top5Table.addCell(new Cell().add(new Paragraph(String.format("%,.0f", item.getTongDoanhThu())).setFont(font)));
+                top5Table.addCell(new Cell().add(new Paragraph(String.format("%.2f %%", item.getTiTrong())).setFont(font)));
+            }
+            
+            document.add(top5Table);
+            document.add(new Paragraph("\n"));
+
+            // Phần 3: Top 5 phim có doanh thu thấp nhất
+            document.add(new Paragraph("3. TOP 5 PHIM CÓ DOANH THU THẤP NHẤT").setFont(boldFont).setFontSize(12));
+            
+            Table bottom5Table = new Table(UnitValue.createPercentArray(new float[]{0.8f, 2.5f, 2.5f, 1.2f, 1.2f, 1.5f, 1.3f}));
+            bottom5Table.setWidth(UnitValue.createPercentValue(100));
+            bottom5Table.setFontSize(8);
+            
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("ID").setFont(boldFont)));
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("Tên Phim").setFont(boldFont)));
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("Thể Loại").setFont(boldFont)));
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("Suất Chiếu").setFont(boldFont)));
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("Vé Bán").setFont(boldFont)));
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("Doanh Thu").setFont(boldFont)));
+            bottom5Table.addHeaderCell(new Cell().add(new Paragraph("Tỉ Trọng").setFont(boldFont)));
+
+            for (ReportRevenue item : tblBottom5.getItems()) {
+                bottom5Table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getIdPhim())).setFont(font)));
+                bottom5Table.addCell(new Cell().add(new Paragraph(item.getTenPhim()).setFont(font)));
+                bottom5Table.addCell(new Cell().add(new Paragraph(item.getTheLoai()).setFont(font)));
+                bottom5Table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getTongSuatChieu())).setFont(font)));
+                bottom5Table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getSoLuongVe())).setFont(font)));
+                bottom5Table.addCell(new Cell().add(new Paragraph(String.format("%,.0f", item.getTongDoanhThu())).setFont(font)));
+                bottom5Table.addCell(new Cell().add(new Paragraph(String.format("%.2f %%", item.getTiTrong())).setFont(font)));
+            }
+            
+            document.add(bottom5Table);
+
+        } finally {
+            document.close();
         }
     }
 
