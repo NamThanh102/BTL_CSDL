@@ -53,6 +53,7 @@ public class InVeController {
         btnExportPDF.setDisable(true);
     }
 
+    // Xử lý tìm kiếm vé theo ID hóa đơn
     @FXML
     private void handleSearch() {
         String idHoaDonStr = txtSearchIdHoaDon.getText().trim();
@@ -90,6 +91,7 @@ public class InVeController {
         }
     }
 
+    // Hiển thị thông tin vé trong VBox
     private void displayTickets(int idHoaDon, List<TicketDetailDTO> tickets) {
         vboxVeDetails.getChildren().clear();
 
@@ -114,6 +116,7 @@ public class InVeController {
         vboxTicketInfo.setVisible(true);
     }
 
+    // Tạo hộp thông tin vé
     private VBox createTicketBox(int ticketNum, TicketDetailDTO ticket) {
         VBox box = new VBox();
         box.setStyle("-fx-border-color: #bbb; -fx-border-width: 1; -fx-padding: 10; -fx-spacing: 5;");
@@ -145,6 +148,7 @@ public class InVeController {
         return box;
     }
 
+    // Xuất PDF
     @FXML
     private void handleExportPDF() {
         if (currentTickets == null || currentTickets.isEmpty()) {
@@ -174,6 +178,7 @@ public class InVeController {
         }
     }
 
+    // Phương thức tạo PDF
     private void generatePDF(String filePath) throws IOException {
         PdfWriter writer = new PdfWriter(filePath);
         PdfDocument pdfDoc = new PdfDocument(writer);

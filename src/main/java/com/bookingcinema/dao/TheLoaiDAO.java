@@ -22,7 +22,7 @@ public class TheLoaiDAO {
                 TheLoai tl = new TheLoai();
                 tl.setIdTheLoai(rs.getInt("idTheLoai"));
                 tl.setNoiDung(rs.getString("NoiDung"));
-                tl.setSoPhim(rs.getInt("SoPhim"));
+                tl.setSoPhim(rs.getInt("SoPhim"));  // gán số phim
                 list.add(tl);
             }
         } catch (SQLException e) {
@@ -32,10 +32,11 @@ public class TheLoaiDAO {
     }
 
     public boolean insertTheLoai(TheLoai theLoai) {
-        String query = "INSERT INTO TheLoai (NoiDung) VALUES (?)";
+        String query = "INSERT INTO TheLoai (NoiDung, idNguoiDung) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, theLoai.getNoiDung());
+            pstmt.setString(2, theLoai.getIdNguoiDung());
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

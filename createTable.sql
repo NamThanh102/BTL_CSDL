@@ -3,6 +3,14 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema QuanLyBanVeOnline
+-- -----------------------------------------------------
+
 -- -----------------------------------------------------
 -- Schema QuanLyBanVeOnline
 -- -----------------------------------------------------
@@ -12,6 +20,8 @@ USE `QuanLyBanVeOnline` ;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`CaLamViec`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`CaLamViec` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`CaLamViec` (
   `idCaLamViec` INT NOT NULL AUTO_INCREMENT,
   `NoiDung` ENUM('CASANG', 'CACHIEU', 'CATOI') NOT NULL,
@@ -26,13 +36,15 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`PhongChieu`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`PhongChieu` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`PhongChieu` (
   `idPhongChieu` INT NOT NULL AUTO_INCREMENT,
   `SucChua` INT NOT NULL,
   `TrangThai` ENUM('DANGHOATDONG', 'BAOTRI') NOT NULL,
   PRIMARY KEY (`idPhongChieu`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_bin;
 
@@ -40,6 +52,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`Ghe`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`Ghe` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`Ghe` (
   `idGhe` INT NOT NULL AUTO_INCREMENT,
   `TrangThai` ENUM('TOT', 'BAOTRI') NOT NULL,
@@ -62,6 +76,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`NguoiDung`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`NguoiDung` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`NguoiDung` (
   `idNguoiDung` CHAR(20) NOT NULL,
   `TaiKhoan` CHAR(100) NOT NULL,
@@ -91,6 +107,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`PhuongThucThanhToan`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`PhuongThucThanhToan` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`PhuongThucThanhToan` (
   `idPhuongThucThanhToan` INT NOT NULL AUTO_INCREMENT,
   `NoiDung` CHAR(45) NOT NULL,
@@ -105,6 +123,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`HoaDon`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`HoaDon` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`HoaDon` (
   `idHoaDon` INT NOT NULL AUTO_INCREMENT,
   `NgayThanhToan` DATETIME NULL DEFAULT NULL,
@@ -121,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`HoaDon` (
     FOREIGN KEY (`idPhuongThucThanhToan`)
     REFERENCES `QuanLyBanVeOnline`.`PhuongThucThanhToan` (`idPhuongThucThanhToan`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_bin;
 
@@ -129,6 +149,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`LichCuThe`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`LichCuThe` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`LichCuThe` (
   `idLichCuThe` INT NOT NULL AUTO_INCREMENT,
   `NgayLamViec` DATE NOT NULL,
@@ -153,6 +175,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`Phim`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`Phim` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`Phim` (
   `idPhim` INT NOT NULL AUTO_INCREMENT,
   `Ten` CHAR(100) NOT NULL,
@@ -167,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`Phim` (
     FOREIGN KEY (`idNguoiDung`)
     REFERENCES `QuanLyBanVeOnline`.`NguoiDung` (`idNguoiDung`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_bin;
 
@@ -175,6 +199,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`SuatChieu`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`SuatChieu` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`SuatChieu` (
   `idSuatChieu` INT NOT NULL AUTO_INCREMENT,
   `GiaVe` INT NOT NULL,
@@ -197,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`SuatChieu` (
     FOREIGN KEY (`idPhongChieu`)
     REFERENCES `QuanLyBanVeOnline`.`PhongChieu` (`idPhongChieu`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 23
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_bin;
 
@@ -205,13 +231,22 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`TheLoai`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`TheLoai` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`TheLoai` (
   `idTheLoai` INT NOT NULL AUTO_INCREMENT,
   `NoiDung` CHAR(45) NOT NULL,
+  `idNguoiDung` CHAR(20) NOT NULL,
   PRIMARY KEY (`idTheLoai`),
-  UNIQUE INDEX `NoiDung_UNIQUE` (`NoiDung` ASC) VISIBLE)
+  UNIQUE INDEX `NoiDung_UNIQUE` (`NoiDung` ASC) VISIBLE,
+  INDEX `fk_TheLoai_NguoiDung1_idx` (`idNguoiDung` ASC) VISIBLE,
+  CONSTRAINT `fk_TheLoai_NguoiDung1`
+    FOREIGN KEY (`idNguoiDung`)
+    REFERENCES `QuanLyBanVeOnline`.`NguoiDung` (`idNguoiDung`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_bin;
 
@@ -219,6 +254,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`TheLoaiPhim`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`TheLoaiPhim` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`TheLoaiPhim` (
   `idTheLoai` INT NOT NULL,
   `idPhim` INT NOT NULL,
@@ -239,6 +276,8 @@ COLLATE = utf8mb4_bin;
 -- -----------------------------------------------------
 -- Table `QuanLyBanVeOnline`.`VeXemPhim`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `QuanLyBanVeOnline`.`VeXemPhim` ;
+
 CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`VeXemPhim` (
   `idVeXemPhim` INT NOT NULL AUTO_INCREMENT,
   `TrangThai` ENUM('CHUASUDUNG', 'DASUDUNG', 'HETHAN') NOT NULL,
@@ -260,6 +299,7 @@ CREATE TABLE IF NOT EXISTS `QuanLyBanVeOnline`.`VeXemPhim` (
     FOREIGN KEY (`idSuatChieu`)
     REFERENCES `QuanLyBanVeOnline`.`SuatChieu` (`idSuatChieu`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 30
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_bin;
 
@@ -267,3 +307,5 @@ COLLATE = utf8mb4_bin;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+

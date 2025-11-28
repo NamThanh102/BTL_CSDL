@@ -519,6 +519,7 @@ public class QuanLyPhimSuatChieuController {
         if (selectedTheLoai == null) {
             TheLoai newTheLoai = new TheLoai();
             newTheLoai.setNoiDung(noiDung);
+            newTheLoai.setIdNguoiDung(UserSession.getInstance().getCurrentUser().getIdNguoiDung());
             success = theLoaiDAO.insertTheLoai(newTheLoai);
             lblTheLoaiMessage.setText(success ? "Thêm thể loại thành công!" : "Thêm thể loại thất bại!");
         } else {
@@ -543,6 +544,7 @@ public class QuanLyPhimSuatChieuController {
         lblTheLoaiMessage.setText("");
     }
     
+    // Ràng buộc xóa thể loại
     private void handleDeleteTheLoai(TheLoai theLoai) {
         if (theLoai.getSoPhim() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

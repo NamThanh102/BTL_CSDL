@@ -77,6 +77,7 @@ public class SuatChieuController {
         cboSearchPhong.setOnAction(e -> handleSearchShowtime());
     }
 
+    // Tải dữ liệu cho các ComboBox
     private void loadComboBoxOptions() {
         // Tải danh sách Phim
         List<Phim> phimList = phimDAO.getAllPhim();
@@ -102,7 +103,7 @@ public class SuatChieuController {
         });
         cboSearchPhong.setConverter(cboPhongChieu.getConverter());
     }
-
+    // Thiết lập bảng Suất Chiếu
     private void setupTable() {
         colSCID.setCellValueFactory(new PropertyValueFactory<>("idSuatChieu"));
         colSCPhim.setCellValueFactory(new PropertyValueFactory<>("tenPhim")); // Phải được set trong DAO
@@ -134,13 +135,13 @@ public class SuatChieuController {
             }
         });
     }
-
+    // Tải dữ liệu Suất Chiếu vào bảng
     private void loadSuatChieuData() {
         // Tải dữ liệu Suất chiếu chi tiết (có tên Phim)
         masterSuatChieuList = FXCollections.observableArrayList(suatChieuDAO.getAllSuatChieuDetails());
         tblSuatChieu.setItems(masterSuatChieuList);
     }
-
+    // Đổ dữ liệu suất chiếu vào form để sửa
     private void fillForm(SuatChieu sc) {
         // Đổ dữ liệu
         cboPhim.setValue(suatChieuDAO.getPhimById(sc.getIdPhim()));
@@ -152,7 +153,7 @@ public class SuatChieuController {
 
         lblShowtimeMessage.setText("Đang sửa Suất chiếu ID: " + sc.getIdSuatChieu());
     }
-
+    // Đặt lại form về trạng thái thêm mới
     @FXML
     private void handleResetShowtime() {
         selectedSuatChieu = null;
@@ -166,7 +167,7 @@ public class SuatChieuController {
         lblShowtimeMessage.setText("Sẵn sàng thêm suất chiếu mới.");
         tblSuatChieu.getSelectionModel().clearSelection();
     }
-
+    // Validation form suất chiếu
     private String validateShowtimeForm(SuatChieu sc, Phim phim, PhongChieu phong, LocalDateTime thoiGian) {
         // Validation logic here
         if (phim == null || phong == null || txtGiaVe.getText().trim().isEmpty()) {
@@ -207,7 +208,8 @@ public class SuatChieuController {
 
         return null; // Form hợp lệ
     }
-
+    
+    // Xử lý lưu suất chiếu (Thêm mới hoặc Cập nhật)
     @FXML
     private void handleSaveShowtime() {
         lblShowtimeMessage.setText("");
@@ -253,7 +255,8 @@ public class SuatChieuController {
             lblShowtimeMessage.setText("Lỗi: Lưu suất chiếu thất bại. Lỗi CSDL.");
         }
     }
-
+    
+    // Xử lý tìm kiếm suất chiếu
     @FXML
     private void handleSearchShowtime() {
         // 1. Lấy tham số tìm kiếm
@@ -273,6 +276,7 @@ public class SuatChieuController {
         lblShowtimeMessage.setText("Đã tìm thấy " + filteredList.size() + " suất chiếu.");
     }
 
+    // Đặt lại tìm kiếm
     @FXML
     private void handleResetSCSearch() {
         cboSearchPhim.getSelectionModel().select(null);
@@ -283,6 +287,7 @@ public class SuatChieuController {
         lblShowtimeMessage.setText("Đã tải lại toàn bộ danh sách suất chiếu.");
     }
 
+    // Xử lý xóa suất chiếu
     @FXML
     private void handleDeleteShowtime(SuatChieu sc) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
