@@ -47,7 +47,7 @@
             <Tab text="📋 Xem Hóa Đơn">
                 <BorderPane fx:id="contentPane2" />
             </Tab>
-            <Tab text="🖨️ In Vé">
+            <Tab text="In Hóa Đơn">
                 <BorderPane fx:id="contentPane3" />
             </Tab>
         </TabPane>

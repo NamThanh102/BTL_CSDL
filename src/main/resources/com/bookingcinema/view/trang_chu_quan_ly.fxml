@@ -15,7 +15,7 @@
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
             <children>
-                <Label text="QUẢN LÝ HỆ THỐNG" textFill="#d32f2f">
+                <Label text="GIAO DIỆN QUẢN LÝ" textFill="#d32f2f">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>

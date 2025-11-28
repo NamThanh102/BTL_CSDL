@@ -17,7 +17,7 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
 
-            <Label text="In Vé Xem Phim" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Label text="In Hóa Đơn" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
 
             <HBox spacing="10.0" alignment="CENTER_LEFT">
                 <TextField fx:id="txtSearchIdHoaDon" promptText="Nhập ID hóa đơn (ví dụ: 1)" prefWidth="300.0" />
